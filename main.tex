@@ -1,0 +1,55 @@
+\documentclass[12pt]{book}
+
+\usepackage[a4paper, margin=1in]{geometry}
+\usepackage{amsmath, amsthm, amssymb}
+\usepackage{mathrsfs}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0pt}
+\usepackage{titlesec}
+\usepackage{tikz}
+\usetikzlibrary{decorations.pathreplacing,calligraphy}
+
+% Theorem environments
+\newtheorem{theorem}{Theorem}[chapter]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{question}[theorem]{Question}
+
+\begin{document}
+
+% Front cover
+\begin{titlepage}
+    \centering
+    \vspace*{3cm}
+    {\scshape\Huge Homological Algebra \par}
+    \vspace{1.5cm}
+    {\Large Based (loosely) on the course taught by Prof. FEA Johnson \par}
+    \vspace{2cm}
+    {\Large by Archie Worth \par}
+    \vfill
+    {\large \today\par}
+\end{titlepage}
+
+\chapter*{Preface}
+\addcontentsline{toc}{chapter}{Preface} 
+\vspace{1cm}
+Help 
+
+\noindent London, England\hfill Archie 
+
+% Table of Contents
+\tableofcontents
+\newpage
+
+\chapter{Modules}
