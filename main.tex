@@ -13,6 +13,7 @@
 \renewcommand{\headrulewidth}{0pt}
 \usepackage{titlesec}
 \usepackage{tikz}
+\usepackage{tikz-cd}
 \usetikzlibrary{decorations.pathreplacing,calligraphy}
 
 % Theorem environments
@@ -53,3 +54,383 @@ Help
 \newpage
 
 \chapter{Modules}
+Before we even start, MOST rings in this course are with unity and commutative! Basically what we are trying to do is study the structure of certain modules. Modules however, can be confusing and hard and horrible. So what we're gonna do is turn them into abelian groups, which is a lot easier, but we can't do that straight away so heres the plan: We replace a module by a projective resolution, apply $Hom(-, M)$ to obtain a cochain complex of abelian groups, and then take cohomology to measure the failure of exactness. Essentially, Homological algebra replaces modules by resolutions so that applying non-exact functors produces complexes whose cohomology records the obstruction to exactness. This wont make much sense now, but just keep this diagram in your head: 
+\begin{align*}
+    \text{Modules } M \xrightarrow{M \rightarrow(P_* \rightarrow M)} \text{Projective Resolutions } P_* \xrightarrow{Hom(P_*, M)} \\\text{Cochain complexes } \xrightarrow{H^n}  \text{Abelian Group } Ext^n(P_*, M)
+\end{align*}
+\section{Basic Definitions}
+\begin{definition}
+    Let $R$ be a ring. A \textbf{module} over $R$, or an $R$-module $M$, is an abelian group, usually written additively, together with an operation of $R$ on $M$, such that, for all $a, b \in R$, and $x, y \in M$ we have 
+    \begin{align*}
+        (a + b)x = ax + bx \text{ and } a(x + y) = ax + ay
+    \end{align*}
+    We also have that $a(-x) = -(ax)$ and $0x = 0$. 
+\end{definition}
+This is essentially a vector space where the scalars come from a ring rather than a field. We also have a similar idea of submodules. 
+
+\begin{example}
+    \begin{enumerate}
+        \item If we take our ring to be a field, then modules over the field are simply vector spaces.
+        \item If we take our set M to be a ring R. Then M = R is an R-module wherein the submodules are the ideals of R. 
+        \item  Let R be a ring and n $\in \mathbb{Z}^n$, define 
+        \begin{align*}
+            R^n = \{(a_1, a_2, \dots, a_n) : a_i \in R\}
+        \end{align*}
+        We can make $R^n$ into an R-module by defining additionn and scalar multiplication componentwise. This module is called the \textbf{free module of rank n over R}.
+        \item Let R = $\mathbb{Z}$ and let $A$ be any abelian group where the operation is written as $+$. We can make $A$ into a $\mathbb{Z}$-module as follows: for any $n \in \mathbb{Z}$ or $a \in A$ define
+        \begin{align*}
+            na = 
+            \begin{cases}
+            a + a + \cdots + a \quad (n \text{ times}), & \text{if } n > 0, \\
+            0, & \text{if } n = 0, \\
+            - a - a - \cdots - a \quad (-n \text{ times}), & \text{if } n < 0.
+            \end{cases}                
+        \end{align*}
+        In this way, any abelian group is a $\mathbb{Z}$-module. 
+    \end{enumerate}
+\end{example}
+
+\begin{definition}
+    Let $M$ be an $R$-module. A subset $N \subseteq M$ is a \textbf{submodule} if:\begin{align*}
+        0 \in N \\
+        x, y \in N \implies x + y \in N \\
+        r \in R \text{ and } x \in N \implies rx \in N
+    \end{align*}
+\end{definition}
+Equivalently $N$ is a submodule iff $N$ is a subgroup of $(M,+)$ and is closed under scalar multiplication by the ring $R$.
+
+\begin{definition}
+    Let $M$ be a module over a ring $A$ and let $S$ be a subset of $M$. We say that $S$ is a \textbf{basis} of $M$ is $S$ is not empty, $S$ generates $M$, and $S$ is linearly independent. 
+\end{definition}
+
+\begin{definition}
+    Let $M$ be a module over $R$, we call $M$ a \textbf{free} module when it has a basis.
+\end{definition}
+
+\begin{proposition}
+    Let $R$ be a commutative ring, if every $R$-module is free, then $R$ is a field. 
+\end{proposition}
+
+\begin{theorem}
+    Let $A$ be a ring and $M$ a module over $A$. Let $I$ be a non-empty set, and let $\{x_i\}_{i \in I}$ be a basis of $M$. Let $N$ be an $A$-module, and let $\{y_i\}_{i \in I}$ be a family of elements of $N$. Then there exists a unique homomorphism $f : M \rightarrow N$ such that $f(x_i)=y_i$ for all $i$. 
+\end{theorem}
+
+\begin{definition}
+    Let $M$ and $N$ be modules over $R$. Let $T : M \rightarrow N$ be a mapping, we say $T$ is \textbf{R-linear} when 
+    \begin{align*}
+        T(x + y)     &= T(x) + T(y) \, \forall x, y \in M\\
+        T(\lambda x) &= \lambda T(x) \, \forall x \in M \, \forall \lambda \in R
+    \end{align*}
+\end{definition}
+
+\begin{proposition}
+    Let $M,N$ be $R$-modules, and $T$ an $R$-linear map between $M$ and $N$ then 
+    \begin{itemize}
+        \item $Im(T)$ is a submodule of $N$ 
+        \item $Ker(T)$ is a submodule of $M$ 
+        \item $T$ is surjective iff $Im(T) = N$ 
+        \item $T$ is injective iff $Ker(T) = M$ 
+    \end{itemize}
+\end{proposition}
+
+\begin{theorem}
+    \label{Free Theorem}
+    For any set $A$ there is a free R-module $F(A)$ on the set $A$ and $F(A)$ satisfies the following property: if $M$ is an $R$-module and $\varphi : A \rightarrow M$ is any map of sets, then there is a unique $R$-module homomorphism $\Phi : F(A) \rightarrow M$ such that $\Phi(a) = \varphi(a)$, for all $a \in A$. That is, the following diagram commutes
+    \[
+    \begin{tikzcd}
+    & M \arrow[ld, "\varphi"'] \arrow[d, "\Phi"] & \\
+    A \arrow[r, "incl."] & F(A) &
+    \end{tikzcd}
+    \]
+    When $A$ is the finite set $\{a_1, a_2, \dots, a_n\}$, $F(A) = Ra_1 \oplus Ra_2 \oplus \dots Ra_n \cong R^n$
+\end{theorem}
+
+
+\section{Short Sequences}
+One of the most important tools for studying the structure of some algebraic object $B$ is the first isomorphism theorem, which relates whatever subobjects $B$ has to the possible homomorphic images of $B$. Written in the category of $R$-modules, we have:
+\begin{theorem}
+    (The First Isomorphism Theorem for Modules) Let $M,N$ be $R$-modules, and let $\varphi : M \rightarrow N$ be an $R$-module homomorphism. Then ker($\varphi$) is a submodule of $M$ and $M/ker(\varphi) \cong \varphi(M)$
+\end{theorem} 
+
+When we've done this with rings before, we often start with a ring $B$ and then construct a homomorphism $\varphi$ (such that ker$(\varphi) \subseteq B$) to study the properties of $B$. Now, we want to consider given two modules $A, C$, whether there exists a module $B$ containing some isomorphic copy of $A$, such that $B/A \cong C$. In other words, $A$ is isomorphic to some submodule of $B$ if there is some injective homomorphism $\psi : A \rightarrow B$, as then $ A \cong Im(\psi) \subseteq B$. And $C$ is isomorphic to the resulting quotient $B/A$ if there is a surjective homomorphism $\varphi : B \rightarrow C$ with $ker(\varphi) = Im(\psi)$ as $B/ker(\varphi) \cong \varphi(B) = C$.
+
+\begin{definition}
+    Let $M_{n+1} \xrightarrow{T_{n+1}} M_n \xrightarrow{T_n} M_{n-1} \xrightarrow{T_{n-1}} \dots$
+    be a sequence of $R$-modules joined together by $R$-linear maps. We say that the sequence is \textbf{exact} at $M_n$ when $Ker(T_n) = Im(T_{n+1})$
+\end{definition}
+
+\begin{proposition}
+    Let $A$, $B$ and $C$ be $R$-modules over some ring $R$. Then 
+    \begin{enumerate}
+        \item The sequence $0 \rightarrow A \xrightarrow{\psi} B$ is exact at $A$ iff $\psi$ is injective.
+        \item The sequence $B \xrightarrow{\varphi} C \rightarrow 0$ is exact at $C$ iff $\varphi$ is surjective.
+    \end{enumerate}
+\end{proposition}
+\begin{proof}
+    The (uniquely defined) homomorphism $0 \rightarrow A$ has image $0$ in $A$ due to the properties of homomorphisms. So this will be the kernel of $\psi$ iff $\psi$ is injective. Similarly, the kernel of the zero homomorphism $C \rightarrow 0$ is all of $C$, which is the image of $\varphi$ iff $\varphi$ is surjective. 
+\end{proof}
+
+\begin{definition}
+    The exact sequence $0 \rightarrow A \xrightarrow{\psi} B \xrightarrow{\varphi} C \rightarrow 0$ is called a \textbf{short exact sequence}.
+\end{definition}
+\begin{example}
+    \begin{enumerate}
+        \item Given modules $A$ and $C$ we can always form their direct sum $B = A \oplus C$ and the sequence: 
+        \begin{align*}
+            0 \rightarrow A \xrightarrow{\varphi} A \oplus C \xrightarrow{\pi} C \rightarrow 0
+        \end{align*}
+        Where $\varphi(a) = (a,0)$ and $\pi(a,c) = c$. In particular it follows that there exists at least one extension of $C$ by $A$. 
+        \item Consider the two $\mathbb{Z}$-modules $A = \mathbb{Z}$, $C = \mathbb{Z}/n\mathbb{Z}$:
+        \begin{align*}
+            0 \rightarrow \mathbb{Z} \xrightarrow{\varphi} \mathbb{Z} \oplus (\mathbb{Z}/n\mathbb{Z}) \xrightarrow{\pi} \mathbb{Z}/n\mathbb{Z} \rightarrow 0
+        \end{align*}
+        Is a special case of example 1. 
+        \item Consider the same modules as above, we can get the exact sequence: 
+        \begin{align*}
+            0 \rightarrow \mathbb{Z} \xrightarrow{n} \mathbb{Z} \xrightarrow{\pi} \mathbb{Z}/n\mathbb{Z} \rightarrow 0
+        \end{align*}
+        wherein $n$ denotes the map $x \mapsto nx$ (obviously injective) and $\pi$ denotes the natural projection $ x \mapsto x (mod n)$ (obviously surjective).  
+    \end{enumerate}
+\end{example}
+\begin{definition}
+    Let $0 \rightarrow A \rightarrow B \rightarrow C  \rightarrow 0$ and $0 \rightarrow A' \rightarrow B' \rightarrow C'  \rightarrow 0$ be short exact sequences of modules. A \textbf{homomorphism of short exact sequences} is a triple $\alpha, \beta, \gamma$ of module homomorphisms such that the following diagram commutes: 
+        \[
+        \begin{tikzcd}
+        0 \arrow[r] & A \arrow[r] \arrow[d, "\alpha"] 
+        & B \arrow[r] \arrow[d, "\beta"] 
+        & C \arrow[r] \arrow[d, "\gamma"] 
+        & 0 \\
+        0 \arrow[r] & A' \arrow[r] 
+        & B' \arrow[r] 
+        & C' \arrow[r] 
+        & 0
+        \end{tikzcd}
+        \]
+    Which is an \textbf{isomorphism of exact sequences} if $\alpha, \beta, \gamma$ are all isomorphisms. 
+\end{definition}
+
+\begin{proposition}
+    (The Short Five lemma) Let $\alpha, \beta, \gamma$ be a homomorphism of exact sequences
+        \[
+        \begin{tikzcd}
+        0 \arrow[r] & A \arrow[r] \arrow[d, "\alpha"] 
+        & B \arrow[r] \arrow[d, "\beta"] 
+        & C \arrow[r] \arrow[d, "\gamma"] 
+        & 0 \\
+        0 \arrow[r] & A' \arrow[r] 
+        & B' \arrow[r] 
+        & C' \arrow[r] 
+        & 0
+        \end{tikzcd}
+        \]
+    \begin{enumerate}
+        \item if $\alpha$ and $\gamma$ are injective, then so is $\beta$
+        \item if $\alpha$ and $\gamma$ are surjective, then so is $\beta$
+        \item if $\alpha$ and $\gamma$ are isomorphisms, then so is $\beta$, and thus the two sequences are isomorphic. 
+    \end{enumerate}   
+\end{proposition}
+
+\begin{definition}
+    Let $\mathcal{E} = 0 \rightarrow A \xrightarrow{j} B \xrightarrow{p} C \rightarrow 0$ be an exact sequence. We say that $\mathcal{E}$ \textbf{splits} if there exists a commutative diagram: 
+        \[
+        \begin{tikzcd}
+        0 \arrow[r] & A \arrow[r, "j"] \arrow[d, "id_A"] 
+        & B \arrow[r, "p"] \arrow[d, "\varphi"] 
+        & C \arrow[r] \arrow[d, "id_C"] 
+        & 0 \\
+        0 \arrow[r] & A \arrow[r, "\iota"] 
+        & A \oplus C \arrow[r, "\pi"] 
+        & C \arrow[r] 
+        & 0
+        \end{tikzcd}
+        \]
+    i.e. there exists such a $\varphi : B \rightarrow A \oplus C$ such that $\varphi \circ j = \iota$ and $\pi \circ \varphi = p$. It follows that $\varphi$ is an isomorphism from the short five lemma. 
+\end{definition}
+
+\begin{definition}
+    Let $\mathcal{E}$ be a short exact sequence as before. We say that $\mathcal{E}$ \textbf{splits on the right} if there exists some $\lambda$-homomorphism $s : C \rightarrow B$ such that $p \circ s = id_C$. I.e. we have the following diagram: 
+    \[
+    \begin{tikzcd}
+    0 \arrow[r]
+    & A \arrow[r, "j"]
+    & B \arrow[r, "p"]
+    & C \arrow[r]
+    & 0
+    \arrow[from=1-4, to=1-3, dotted, "s"', shift left=3]
+    \end{tikzcd}
+    \]
+    We say $\mathcal{E}$ \textbf{splits on the left} when $\exists r : B \rightarrow A$ such that $r \circ j = id_A$.
+\end{definition}
+
+\begin{lemma}
+    Let $\mathcal{E} = 0 \rightarrow A \xrightarrow{j} B \xrightarrow{p} C \rightarrow 0$ be an exact sequence of $\lambda$-modules. Then $\mathcal{E}$ splits on the right $\implies$ $\mathcal{E}$ splits. 
+\end{lemma}
+\begin{proof}
+    Since $\mathcal{E}$ splits on the right, $\exists s : C \rightarrow B$ such that $p \circ s = id_C$. Consider the two exact sequences:
+        \[
+        \begin{tikzcd}
+        0 \arrow[r] & A \arrow[r, "\iota"] \arrow[d, "id_A"] 
+        & A \oplus C \arrow[r, "\pi"] \arrow[d, "\varphi"]
+        & C \arrow[r] \arrow[d, "id_C"]
+        & 0 \\
+        0 \arrow[r] & A \arrow[r, "j"]  
+        & B \arrow[r, "p"] 
+        & C \arrow[r] 
+        & 0 
+        \end{tikzcd}
+        \]
+    where $\psi(a,c) = j(a) + s(c)$. Note that we can always construct the exact sequence at the top as shown in examples. Observe: 
+    \begin{align*}
+        p \psi(a,c) &= p(j(a) + s(c))\\
+                    &= p(j(a)) + p(s(c))
+    \end{align*}
+    Since the sequence is exact, $p(j(a)) = 0$ so 
+    \begin{align*}
+        p \psi(a,c) &= 0 + p(s(c))\\
+                    &= c \\
+                    &= \pi(a,c)
+    \end{align*}
+    So the diagram: 
+        \[
+        \begin{tikzcd}
+        A \oplus C \arrow[r, "\pi"] \arrow[d, "\psi"'] 
+        & C \arrow[d, "id_C"] \\
+        B \arrow[r, "p"'] 
+        & C
+        \end{tikzcd}
+        \]
+    commutes. Similarly, the other side of the original diagram commutes. So $\mathcal{E}$ splits. 
+\end{proof}
+
+\section{Projective Modules and Resolutions}
+Here we will lay out 3 seperate definitions of projective modules, and then show they are equivalent. 
+
+\begin{definition}(1)
+    Suppose we are given a diagram of $\lambda$-modules: 
+    \[
+    \begin{tikzcd}
+    & P \arrow[ld, dashed, "\hat{\varphi}"'] \arrow[d, "\varphi"] & \\
+    X \arrow[r, two heads, "p"] & M &
+    \end{tikzcd}
+    \]
+    P is \textbf{projective} when $\exists \hat{\varphi} : P \rightarrow X$ such that $p \circ \hat{\varphi} = \varphi$.
+\end{definition}
+
+\begin{definition}(2)
+    Suppose we are given an exact sequence of $\lambda$-modules 
+    \begin{align*}
+        0 \rightarrow K \xrightarrow{j} X \xrightarrow{p} P \rightarrow 0
+    \end{align*}
+    Then $P$ is \textbf{projective} iff every such exact sequence splits. 
+\end{definition}
+
+\begin{definition}(3)
+    $P$ is \textbf{projective} $\iff$ there exists a $\lambda$-module $K$ such that $K \oplus P$ is free (i.e. has a basis).
+\end{definition}
+
+\begin{proposition}
+    Definition 1 $\iff$ Definition 2 $\iff$ Definition 3
+\end{proposition}
+\begin{proof}
+    $(1) \implies (2)$
+    Given an exact sequence: 
+    \begin{align*}
+        0 \rightarrow K \xrightarrow{j} X \xrightarrow{p} P \rightarrow 0
+    \end{align*}
+    We can get the diagram: 
+    \[
+    \begin{tikzcd}
+    & P \arrow[ld, dashed, "s \, =\,  \hat{id}"'] \arrow[d, "id"] & \\
+    X \arrow[r, two heads, "p"] & P &
+    \end{tikzcd}
+    \]
+    As $p$ is surjective by exactness and by Definition 1, $\exists s : P \rightarrow X$ (s.t. $s \, = \, \hat{id}$) wherein $p \circ s = id_p$. This is the definition of splitting on the right, which implies that the exact sequence splits.\\
+    $(2) \implies (3)$ Let $P$ be a $\lambda$-module and let $(e_i)_{i \in I}$ be a set of generators for $P$. i.e. $\forall x \in P$ there exists $(x_i)_{i \in I} \in \lambda$ (almost all zero), such that $x = \sum e_i x_i$. 
+    COMPLETE LATER
+\end{proof}
+
+\begin{proposition}
+    Let $M$ be a free module, then $M$ is projective. 
+\end{proposition}
+
+\begin{definition}
+    Let $M$ be any $R$-module. A \textbf{projective resolution} of A is an exact sequence 
+    \begin{align*}
+        \dots \rightarrow P \xrightarrow{d_n} P_{n-1} \xrightarrow{d_{n-1}} \dots \xrightarrow{d_1} P_0 \xrightarrow{\epsilon} M \rightarrow 0.  
+    \end{align*}
+    such that each $P_i$ is a projective $R$-module.    
+\end{definition}
+
+\begin{proposition}
+    Every $R$-module $M$ has a projective resolution. 
+\end{proposition}
+\begin{proof}
+    Let $P_0$ be any free (hence projective) $R$-module on a set of generators of $M$ and define an $R$-module hom $\epsilon$ from $P_0$ onto $M$ as in Theorem \ref{Free Theorem}. This begins the resolution $\epsilon : P_0 \xrightarrow{\epsilon} M \rightarrow 0$. Since $\epsilon$ is surjective, the sequence is exact. Next let $K_0 = ker(\epsilon)$ and let $P_1$ be any free module mapping itself onto the submodule $K_0 \subseteq P_0$, thus giving the second stage $P_1 \rightarrow P_0 \rightarrow M \rightarrow 0$ which is also exact by construction. Carrying this process on to the $n$th stage, gives a free resolution of $M$, and thus a projective resolution.    
+\end{proof}
+
+\begin{remark}
+    One of the reasons we use projective resolutions is that it makes it possible to do various liftings later. 
+\end{remark}
+
+\chapter{Appendix}
+\section{Category Theory}
+This is a small aside on category theory. 
+\begin{definition}
+    A category \textbf{C} consists of a class of objects and sets of morphisms between them. For every ordered pair $A, B$ of objects, there is a set $\text{Hom}_C(A,B)$ of morphisms from $A$ to $B$. Moreover, for every ordered triple $A, B, C$ of objects there is a \textit{law of composition of morphisms}, i.e. a map 
+    \begin{align*}
+        \text{Hom}_C(A,B) \times \text{Hom}_C(B,C) \rightarrow \text{Hom}_C(A,C)
+    \end{align*}
+    where $(f,g) \mapsto gf$. 
+\end{definition}
+The objects and morphisms also satisfy the following axioms for objects $A, B, C, D$. 
+\begin{enumerate}
+    \item if $A \neq B$ or $C \neq D$, then $\text{Hom}_C(A,B)$ and $\text{Hom}_C(C,D)$ are disjoint sets. 
+    \item Composition of morphisms is associative 
+    \item Each object has an identity morphism, i.e. for every object $A$ there is a morphism $1_A \in \text{Hom}_C(A,A)$ such that $f(1_A) = f$ for every $f \in \text{Hom}_C(A,B)$ and $1_Ag = g$ for every $g \in \text{Hom}_C(B, A)$
+\end{enumerate}
+
+\begin{definition}
+    Let $\mathbf{C,D}$ be categories. We say that $\mathcal{F}$ is a \textbf{covariant functor} from $\mathbf{C}$ to $\mathbf{D}$ if 
+    \begin{enumerate}
+        \item For every object $A$ in $\mathbf{C}$, $\mathcal{F}(A)$ is an object in $\mathbf{D}$. 
+        \item For every $f \in \text{Hom}_\mathbf{C}(A,B)$ we have $\mathcal{F}(f) \in \text{Hom}_\mathbf{D}(\mathcal{F}A, \mathcal{F}B)$.  
+    \end{enumerate}
+    such that the following axioms are satisfied. 
+    \begin{enumerate}
+        \item if $gf$ is a composition of morphisms in $\mathbf{C}$, then $\mathcal{F}(gf) = \mathcal{F}(g)\mathcal{F}(f)$
+        \item $\mathcal{F}(1_A) = 1_{\mathcal{F}A}$
+    \end{enumerate}
+\end{definition} 
+    
+\begin{definition}
+    Let $\mathbf{C,D}$ be categories. We say that $\mathcal{F}$ is a \textbf{contravariant functor} from $\mathbf{C}$ to $\mathbf{D}$ if it satisfies the same definition as a covariant functor, but with the two following differences: 
+    \begin{enumerate}
+        \item for every $f \in \text{Hom}_\mathbf{C}(A,B)$, $\mathcal{F}(f) \in \text{Hom}_\mathbf{D}(\mathcal{F}B, \mathcal{F}A)$
+        \item if $gf$ is a composition of morphisms in $\mathbf{C}$, then $\mathcal{F}(gf) = \mathcal{F}(f)\mathcal{F}(g)$ in $\mathbf{D}$. 
+    \end{enumerate}
+    i.e. contravariant functors reverse the arrows. 
+\end{definition}
+
+\chapter{scrap}
+Basically, we want our module $M$ to be free, because then everything is a lot easier. A lot of the time, this cannot happen, so we create a sequence of free modules leading up to $M$. Suppose, from the previous section, we have a $R$-module $M$. Then we can find a surjective linear map $\alpha_0 : F_0 \rightarrow M$ where $F_0$ is free ( This is the 1st approximation to $M$ being free). Now if $\alpha_0$ is also injective, then $M \cong F_0$ and thus $M$ is free. Suppose not, then we have that $Ker(\alpha_0) \neq 0$. Since this is an $R$-module, we can use the proposition again and find surjective $\alpha_1 : F_1 \rightarrow Ker(F_0)$, giving us the sequence: 
+\begin{align*}
+    F_1 \xrightarrow{\alpha_1} F_0 \xrightarrow{\alpha_0} M \rightarrow 0
+\end{align*}
+In general, $Ker(\alpha_1)$ isn't injective either, so you repeat the process. Now lets define this all formally. 
+
+
+\begin{proposition}
+    Let $M$ be an $R$-module. Then there exists an exact sequence of $R$-linear mappings: 
+    \begin{align*}
+        \dots \rightarrow F_{n+1} \xrightarrow{f_{n+1}} F_n \xrightarrow{f_n} F_{n-1} \rightarrow \dots F_2 \xrightarrow{f_2} F_1 \xrightarrow{f_1} F_0 \xrightarrow{f_0} M \rightarrow \dots 
+    \end{align*}
+    where each $F_i$ is free. 
+\end{proposition}
+
+Such a sequence is called a \textbf{free resolution} of $M$. Sometimes it carries on forever and other times it stops after finite steps. 
+
+\begin{example}
+    Lets work in the ring $R = \mathbb{Z}$ and take $M = \mathbb{Z}/2$
+\end{example}
+
+\end{document}
