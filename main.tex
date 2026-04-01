@@ -107,7 +107,32 @@ Equivalently $N$ is a submodule iff $N$ is a subgroup of $(M,+)$ and is closed u
         T(x + y)     &= T(x) + T(y) \, \forall x, y \in M\\
         T(\lambda x) &= \lambda T(x) \, \forall x \in M \, \forall \lambda \in R
     \end{align*}
+    We denote the set of all $R$-linear maps from $M$ to $N$ as $Hom_R{M,N}$
 \end{definition}
+
+\begin{proposition}
+    Hom$_R(M,N)$ is an $R$-module. 
+\end{proposition}
+\begin{proof}
+    Define addition, scalar multiplication, and zero as follows: $(\alpha + \beta)(m) = \alpha(m) + \beta(m)$, $(\alpha \lambda)(m) = \alpha(m) \lambda$ for $\lambda \in R$, and $\mathbf{0}(m) = 0$.
+    Then for $r \in R$ and $m_1, m_2 \in M$ we have 
+    \begin{align*}
+        (\alpha + \beta)(rm_1 + m_2) = \alpha(rm_1 + m_2) + \beta(rm_1 + m_2) = r\alpha(m_1) + \alpha(m_2) + r\beta(m_1) + \beta(m_2)
+    \end{align*}
+    which then after rearranging is equal to $r(\alpha + \beta)(m_1) + (\alpha + \beta)(m_2)$ since $\alpha$ and $\beta$ are already homs. Now let $m \in M$
+    \begin{align*}
+        (\alpha \lambda)(rm) = \alpha(rm)\lambda = (r \alpha(m))\lambda = r(\alpha(m)\lambda) = r((\alpha \lambda)(m))
+    \end{align*}
+    as required. Note that the associative property used in the third step required $R$ to be commutative\footnote{Let $m \in M$ and $a, b \in R$, $(ab)\alpha(m) = (\alpha(m))(ab)$ but $(a(b\alpha))(m) = (b\alpha)(m)a = (\alpha(m)b)a = \alpha(m)(ba)$ so $(ab) = (ba)$ for this to hold}.
+\end{proof}
+
+\begin{proposition}
+    For any $\Lambda$-module $N$, $Hom_\Lambda(\Lambda, N) \cong N$
+\end{proposition}
+\begin{proof}
+    \label{HomProp1}
+    This is given by the isomorphism $\psi : Hom_\Lambda(\Lambda, N) \to N$ where $\psi(f) = f(1)$.
+\end{proof}
 
 \begin{proposition}
     Let $M,N$ be $R$-modules, and $T$ an $R$-linear map between $M$ and $N$ then 
@@ -501,13 +526,7 @@ We can phrase this in category theoretic terms, giving yet ANOTHER "definition" 
 
 We will see later, the study of how much $Hom_\Lambda(D, -)$ fails to be exact is one of the big areas of homological algebra. Note we have essentially the same results for the contravariant functor $Hom_\Lambda(-, D)$ in terms of failure to be exact and so on. We will end this section with a few useful propositions about $Hom$.
 
-\begin{proposition}
-    For any $\Lambda$-module $N$, $Hom_\Lambda(\Lambda, N) \cong N$
-\end{proposition}
-\begin{proof}
-    \label{HomProp1}
-    This is given by the isomorphism $\psi : Hom_\Lambda(\Lambda, N) \to N$ where $\psi(f) = f(1)$.
-\end{proof}
+
 
 
 
@@ -921,7 +940,64 @@ which is given by $f \mapsto (0 \rightarrow N \xrightarrow{j} \lim_{\rightarrow}
     If in the above context, $X$ is projective, then $\lim_\rightarrow$ is surjective
 \end{proposition}
 \begin{proof}
-    Tooooo long but just use the universal property of pushouts. 
+    Let $\alpha \in$ Ext($M,N$) and suppose it represented by the extension: 
+    \begin{align*}
+        \alpha = (0 \rightarrow N \rightarrow A \rightarrow M \rightarrow 0)
+    \end{align*} 
+    Then if we let $\mathcal{P} = (0 \rightarrow K \xrightarrow{i} X \xrightarrow{\epsilon} M \rightarrow 0)$ be a projective 0-complex, from the universal property of projectivesd there is a morphism of extensions lifting the identity map of $M$ to $M$ i.e. there is a $g: \mathcal{P} \to \alpha$ such that 
+    \[
+    \begin{tikzcd}
+        0 \arrow[r] & K \arrow[r, "i"] \arrow[d, "g_1"] 
+        & X \arrow[r, "\epsilon"] \arrow[d, "g_0"] 
+        & M \arrow[r] \arrow[d, "id"]
+        & 0\\
+        0 \arrow[r] & N \arrow[r, "j"] 
+        & A \arrow[r, "\pi"]  
+        & M \arrow[r] 
+        & 0
+    \end{tikzcd}
+    \]
+    We also have that $lim_\rightarrow(g_1)$ gives the diagram: 
+    \[
+    \begin{tikzcd}
+        0 \arrow[r] & K \arrow[r, "i"] \arrow[d, "g_1"] 
+        & X \arrow[r, "p"] \arrow[d, "\nu"] 
+        & M \arrow[r] \arrow[d, equal]
+        & 0\\
+        0 \arrow[r] & N \arrow[r, "r"] 
+        & \lim_{\rightarrow}(f,i) \arrow[r, "q"]  
+        & M \arrow[r] 
+        & 0
+    \end{tikzcd}
+    \]
+    So then by the universal property of pushouts
+    \[
+    \begin{tikzcd}
+    K \arrow[d,"g_1"'] \arrow[r,"i"] &
+    X \arrow[d,"\nu"'] \arrow[ddr,bend left,"g_0"] \\
+    N \arrow[r,"r"] \arrow[drr,bend right,"j"'] &
+    lim_\rightarrow(f,i) \arrow[dr,dashed,"\delta"] \\
+    && A
+    \end{tikzcd}
+    \]
+    Putting this all together gives 
+    \[
+    \begin{tikzcd}
+        0 \arrow[r] & K \arrow[r, "i"] \arrow[d, "g_1"] 
+        & X \arrow[r, "\epsilon"] \arrow[d, "g_0"] 
+        & M \arrow[r] \arrow[d, "id"]
+        & 0\\
+        0 \arrow[r] & N \arrow[r, "r"] \arrow[d, equal]
+        & lim_\rightarrow(f,i) \arrow[r, "q"] \arrow[d, "\delta"] 
+        & M \arrow[r] \arrow[d, equal]
+        & 0\\
+        0 \arrow[r] & N \arrow[r, "j"]
+        & A \arrow[r, "\pi"]
+        & M \arrow[r]
+        & 0
+    \end{tikzcd}
+    \]
+    By the five lemma $\delta$ is an isomorphism so $lim_\rightarrow(g_1) \equiv \alpha$
 \end{proof}
 
 \begin{proposition}
