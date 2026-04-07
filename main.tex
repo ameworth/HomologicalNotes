@@ -263,6 +263,8 @@ Okay, so going back to our first isomorphism theorem, $M/ker(\varphi) \cong Im(\
     Which is an \textbf{isomorphism of exact sequences} if $\alpha, \beta, \gamma$ are all isomorphisms. 
 \end{definition}
 
+Note that in such a scenario as above, if $\alpha$, $\beta$ and $\gamma$ are isomorphisms and the diagram commutes then the top sequence is exact iff the bottom sequence is exact. 
+
 \begin{proposition}
     (The Short Five lemma) Let $\alpha, \beta, \gamma$ be a homomorphism of exact sequences
         \[
@@ -320,11 +322,12 @@ Okay, so going back to our first isomorphism theorem, $M/ker(\varphi) \cong Im(\
     Let $\mathcal{E} = 0 \rightarrow A \xrightarrow{j} B \xrightarrow{p} C \rightarrow 0$ be an exact sequence of $\lambda$-modules. Then $\mathcal{E}$ splits on the right $\iff$ $\mathcal{E}$ splits $\iff \mathcal{E}$ splits on the left. 
 \end{lemma}
 \begin{proof}
+    (Splits on right $\implies$ splits )
     Since $\mathcal{E}$ splits on the right, $\exists s : C \rightarrow B$ such that $p \circ s = id_C$. Consider the two exact sequences:
         \[
         \begin{tikzcd}
         0 \arrow[r] & A \arrow[r, "\iota"] \arrow[d, "id_A"] 
-        & A \oplus C \arrow[r, "\pi"] \arrow[d, "\varphi"]
+        & A \oplus C \arrow[r, "\pi"] \arrow[d, "\psi"]
         & C \arrow[r] \arrow[d, "id_C"]
         & 0 \\
         0 \arrow[r] & A \arrow[r, "j"]  
@@ -353,7 +356,47 @@ Okay, so going back to our first isomorphism theorem, $M/ker(\varphi) \cong Im(\
         & C
         \end{tikzcd}
         \]
-    commutes. Similarly, the other side of the original diagram commutes. So $\mathcal{E}$ splits. SORRY
+    commutes. Similarly, the other side of the original diagram commutes. So $\mathcal{E}$ splits.\\
+
+    \noindent (Splits implies splits on the right)
+    Assume that we have the following commutative diagram: 
+        \[
+        \begin{tikzcd}
+        0 \arrow[r] & A \arrow[r, "j"] \arrow[d, "id_A"] 
+        & B \arrow[r, "p"] \arrow[d, "\varphi"] 
+        & C \arrow[r] \arrow[d, "id_C"] 
+        & 0 \\
+        0 \arrow[r] & A \arrow[r, "\iota"] 
+        & A \oplus C \arrow[r, "\pi"] 
+        & C \arrow[r] 
+        & 0
+        \end{tikzcd}
+        \]
+        By the five lemma, $\varphi$ is an isomorphism, so there is an inverse $\varphi^{-1} : A \oplus C \to B$. Let $f : C \to A \oplus C$ be the inclusion map. Define $s: C \to B$ where $ s = \varphi^{-1} \circ f$. Then we have 
+        \begin{align*}
+            p \circ s = p \circ \varphi^{-1} \circ f = \pi \circ f = id_C
+        \end{align*}
+        Since $\pi \circ \varphi = p$ as the diagram commutes.\\
+        \noindent (Splits on the left implies splits) Assume there exists some $r : B \to A$ such that $r \circ j = id_A$. Then consider the exact two exact sequences: 
+        \[
+        \begin{tikzcd}
+        0 \arrow[r] & A \arrow[r, "j"] \arrow[d, "id_A"] 
+        & B \arrow[r, "p"] \arrow[d, "\varphi"] 
+        & C \arrow[r] \arrow[d, "id_C"] 
+        & 0 \\
+        0 \arrow[r] & A \arrow[r, "\iota"] 
+        & A \oplus C \arrow[r, "\pi"] 
+        & C \arrow[r] 
+        & 0
+        \end{tikzcd}
+        \]
+        Then define $\varphi : B \to A \oplus C$ by $\varphi(b) = (r(b), p(b))$. Observe: 
+        \begin{align*}
+            \varphi \circ j (a) &= (r(j(a)), p(j(a)))\\
+                                &= (a, 0)\\
+                                &= \iota(a)
+        \end{align*}
+        Since the sequence is exact. Thus the diagram commutes and $\varphi$ is an isom by the five lemma. The final implication is very similar to the other case. 
 \end{proof}
 
 \subsection{Projective Modules}
@@ -500,10 +543,23 @@ However, all is not lost! We have the following theorem:
     If $0 \rightarrow L \xrightarrow{\psi} M \xrightarrow{\phi} N \rightarrow 0$ is a short exact sequence of $\Lambda$-modules, then $0 \rightarrow Hom_\Lambda(D,L) \xrightarrow{\psi^*} Hom_\Lambda(D,M) \xrightarrow{\phi^*} Hom_\Lambda(D,N)$ is exact. 
 \end{theorem}
 \begin{proof}
-    Uhhhh
+    From a previous proposition we have that  $0 \rightarrow Hom_\Lambda(D,L) \xrightarrow{\psi^*} Hom_\Lambda(D,M)$ is exact, so it remains to show that Im($\psi_*$) = Ker($\phi_*$). 
+    First Im($\psi_*$) $\subseteq$ Ker($\phi_*$) since $\phi_*(\psi_*(g)) = \phi \circ \psi \circ g = 0$ by exactness. Now observe 
+    \begin{align*}
+        Ker(\phi_*) &= \{f \in Hom_\Lambda(D,M): \phi_*(f) = 0\}\\
+                    &= \{f \in Hom_\Lambda(D,M): \phi \circ f = 0\}
+    \end{align*}
+    So Im($f$) $\subseteq$ ker($\phi$). By exactness of the original sequence we thus have Im($f$) $\subseteq$ Im($\psi$). Consider $f(d) \in M$, $f(d) \in$ Im($\psi$) so since $\psi$ is injective there exists exactly one $l \in L$ such that $\psi(l) = f(d)$. Define a new map $h(d) = l$. Then $\psi_*(h)(d) = \psi \circ h (d) = \psi(l) = f(d)$. So $f \in$ Im($\psi_*$). Hence Ker($\phi_*$) $\subseteq$ Im($\psi_*$).
+    Thus we have equality and the sequence is exact.
 \end{proof}
 
-Note that the above theorem applies to the contravariant functor $Hom_\Lambda(-, D)$ (i.e. both hom functors are left exact). We CAN however, turn it into an exact sequence when $D$ is a projective module. This is essentially due to the lifting property and the reason we use projective modules to begin with. This is not true for the contravariant Hom functor, which requires $D$ to be an injective module for Hom to be exact, which we will not go into in this module. 
+We can phrase this in category theoretic terms\footnote{see appendix for definitions}. 
+
+\begin{proposition}
+    The functor Hom$_\Lambda(D, -)$ is left exact. 
+\end{proposition}
+
+Note that the above proposition also applies to the contravariant functor $Hom_\Lambda(-, D)$.
 
 \begin{theorem}
     If $0 \rightarrow L \xrightarrow{\psi} M \xrightarrow{\phi} N \rightarrow 0$ is an exact sequence, and $D$ is a projective module, then $0 \rightarrow Hom_\Lambda(D,L) \xrightarrow{\psi^*} Hom_\Lambda(D,M) \xrightarrow{\phi^*} Hom_\Lambda(D,N) \rightarrow 0$ is exact!
@@ -524,9 +580,19 @@ We can phrase this in category theoretic terms, giving yet ANOTHER "definition" 
     Let $D$ be a $\Lambda$-module. Then $Hom_\Lambda(D, -)$ is exact iff $D$ is projective. 
 \end{corollary}
 
-We will see later, the study of how much $Hom_\Lambda(D, -)$ fails to be exact is one of the big areas of homological algebra. Note we have essentially the same results for the contravariant functor $Hom_\Lambda(-, D)$ in terms of failure to be exact and so on. We will end this section with a few useful propositions about $Hom$.
+The above theorem does not apply to the contravariant Hom functor. We need $D$ to be an injective module for $Hom_\Lambda(-,D)$ to be exact, although we will not go into the definition of an injective module. 
 
+We will see later, the study of how much $Hom_\Lambda(D, -)$ fails to be exact is one of the big areas of homological algebra. Note we have essentially the same results for the contravariant functor $Hom_\Lambda(-, D)$ in terms of failure to be exact and so on. We will end this section with a useful proposition about $Hom$.
 
+\begin{proposition}
+    Let $\Lambda$ be a ring and $A$ be an arbitrary $\Lambda$-module, then 
+    \begin{align*}
+        Hom_\Lambda(\Lambda, A) \cong A
+    \end{align*}
+\end{proposition}
+\begin{proof}
+    Define a $\Lambda$ homomorphism $\varphi : Hom_\Lambda(\Lambda, A) \to A$ which evaluates $f \in Hom_\Lambda(\Lambda, A)$ at $1 \in A$. Immediately well-defined and an isomorphism from definitions. 
+\end{proof}
 
 
 
@@ -570,7 +636,7 @@ There are many reasons we use projective resolutions, but one important reason i
     commutes
 \end{definition}
 
-\begin{proposition}
+\begin{proposition}\label{Lifting of Chain Complexes}
     Define $M, M', P_*, Q_*, \text{ and } f$ as above. Then there always exists a lifting of $f$ to $f_*$
 \end{proposition}
 \begin{proof}
@@ -783,12 +849,12 @@ The most important thing, for us, about cochain complexes is that they give rise
     And so the sequence  $0 \rightarrow Hom_\Lambda(M,A) \rightarrow Hom_\Lambda(M, B) \rightarrow Hom_\Lambda(M,C) \rightarrow \dots$ is exact iff $H^1(M,A)$ is zero! This then, shows that the first cohomology group is the first step in measuring how the $Hom$ functor has failed to be exact. 
 \end{remark}
 
-\subsection{Reverse Exact Sequence and the Snake Lemma}
+\subsection{Reverse Exact Sequence}
 It turns out there is another natural way in which to get a long exact sequence of cohomology groups from some short exact sequence
 \begin{align*}
     0 \rightarrow A \xrightarrow{f} B \xrightarrow{g} C \rightarrow 0 
 \end{align*}
-and a $\Lambda$-module $M$. Instead of taking a projective resolution of $M$, we take projective resolutions of $A,B$, and $C$, make them into a short exact sequence and then apply the \textit{contravariant} functor $Hom_\Lambda(-,M)$. This then induces the \textbf{reverse exact sequence} of cohomology groups. 
+and a $\Lambda$-module $M$. Instead of taking a projective resolution of $M$, we take projective resolutions of $A,B$, and $C$, make them into a short exact sequence and then apply the \textit{contravariant} functor $Hom_\Lambda(-,M)$. This then induces the \textbf{reverse exact sequence} of cohomology groups. The proofs of each proposition leading up to applying Mayer-Vietoris requires doing lots of finnicky algebra and huge diagrams so I've made the inspired decision to leave it out of these notes, sorry!
 
 \begin{remark}
     If we take any resolution $P_* \rightarrow A$, $T_* \rightarrow B$, and $Q_* \rightarrow C$, then the sequence
@@ -798,7 +864,7 @@ and a $\Lambda$-module $M$. Instead of taking a projective resolution of $M$, we
     is \textbf{not} necessarily exact! However, it turns out that we can construct a resolution for $B$ in such a way that the sequence does in fact become exact.
 \end{remark}
 
-\begin{theorem}(Snake Lemma)
+\begin{theorem}
     Let $0 \rightarrow A \xrightarrow{f} B \xrightarrow{g} C \rightarrow 0$ be an exact sequence of $\Lambda$-modules, $P_* \rightarrow A$ and $Q_* \rightarrow C$ be projective resolutions for A and C respectively. Then there exists a projective resolution $T_* \rightarrow B$ for $B$ such that for all $n$, $T_n = P_n \oplus Q_n$ and the map between each $T_n$ is given by 
     \begin{align*}
         \partial^T_n = 
@@ -845,6 +911,8 @@ and a $\Lambda$-module $M$. Instead of taking a projective resolution of $M$, we
 
 \chapter{Baer's Theorem and Ext}
 In this chapter, we will develop more what the cohomology groups actually are and their relation to the Ext group. 
+
+\subsection{Baer's Theorem}
 
 \begin{definition}
     Fix two $\Lambda$-modules $M$ and $N$. We define $\mathcal{E}xt(M,N)$ to be the set of all extensions of $M$ by $N$, that is all exact sequences of the form: 
@@ -1060,17 +1128,125 @@ Because of Baer's Theorem, you don't have to search for modules at all; you just
 \end{example}
 
 \subsection{More Details on Projective Modules}
-This next proposition can also be used as a definition for projective modules. 
+Now that we have the required machinery, we can give some more details on projective modules. 
 
 \begin{proposition}
     Let $P$ be a $\Lambda$-module. Then $P$ is projective iff $H^1(P,N) = 0$ for all $\Lambda$-modules $N$.    
 \end{proposition}
 \begin{proof}
-    If $P$ is projective, consider the following two 
+    If $P$ is projective, consider the following projective resolution of $P$: $0 \rightarrow P \xrightarrow{id} P \rightarrow 0$. Taking the coefficient exact sequence immediately gives that $H^1(P,N) = 0$ for all modules $N$. 
+    \\Conversely, assume that $H^1(P,N) = 0$ for all $\Lambda$-modules $N$. Let $(e_i)_{i \in I}$ be a spanning set for $P$ and F be the free module with $(E_i)_{i \in I}$ such that $\pi(E_i) = e_i$. Setting $K = \text{ker}(\pi)$ we get the exact sequence: 
+    \begin{align*}
+        0 \rightarrow K \xrightarrow{i} F \xrightarrow{\pi} P \rightarrow 0
+    \end{align*}
+    where $i$ is the inclusion map. Take the coefficient exact sequence (i.e. $H^*(P, -)$) to get 
+    \begin{align*}
+        0 \rightarrow Hom(P,K) \xrightarrow{i_*} Hom(P,f) \xrightarrow{\pi_*} Hom(P,P) \rightarrow H^1(P,K) \rightarrow \dots 
+    \end{align*}
+    which since $H^1(P,N) = 0$ for any $N$ we have: 
+    \begin{align*}
+        0 \rightarrow Hom(P,K) \xrightarrow{i_*} Hom(P,F) \xrightarrow{\pi_*} Hom(P,P) \rightarrow 0
+    \end{align*}
+    is exact. Therefore $\pi_*$ is surjective, so there exists some $s \in Hom(P,F)$ such that $\pi_*(s) = \pi \circ s = id_P$. This implies that the original sequence splits on the right and therefore splits. Then $F \cong P \oplus K$ where $F$ is free thus $P$ is projective by the summand definition. 
 \end{proof}
 
-This is very important, if we see
+This implies that projective modules are effectively "invisible" to cohomology. We can also prove the above using the reverse exact sequence, which I will include below just for a bit of fun. Note that both the above and below arguments can also be used to show that $P$ is projective iff $H^n(P,N) = 0$ for all $n \in \mathbb{N}$
 
+\begin{proposition}
+    (Reverse Exact Sequence Version) Let $P$ be a $\Lambda$-module. Then $P$ is projective iff $H^1(P,N) = 0$ for all $\Lambda$-modules $N$.
+\end{proposition}
+
+\begin{proposition} (Schanuel's Lemma)
+    Let $0 \rightarrow I \xrightarrow{i} P \xrightarrow{p} M \rightarrow 0$ and $0 \rightarrow J \xrightarrow{j} Q \xrightarrow{q} M \rightarrow 0$ be short exact sequences of $\Lambda$-modules wherein $P, Q$ are projective. Then $I \oplus Q \cong J \oplus P$.
+\end{proposition}
+\begin{proof}
+    Define the pullback module $\lim_{\leftarrow}(p,q) = \{(x,y) \in P \oplus Q: p(x) = q(y)\}$. Define the map $\pi_1 : \lim_{\leftarrow}(p,q) \to P$ as the projection of the pullback onto $P$. Pick any element $x \in P$ and consider its image in $M$, $p(x)$. Since $q$ is surjective, we have that there must exist a $y \in Q$ such that $p(x) = q(y)$, therefore $(x,y) \in \lim_{\leftarrow}(p,q)$. Since $\pi_1(x,y) = x$ this means that $\pi_1$ is surjective. Similarly, we can show the projection $\pi_2: \lim_{\leftarrow} \to Q$ is surjective. So there we get two exact sequences: 
+    \begin{align*}
+        0 \rightarrow \ker{\pi_1} \rightarrow \lim_{\leftarrow}(p,q) \xrightarrow{\pi_1} P \rightarrow 0\\
+        0 \rightarrow \ker{\pi_2} \rightarrow \lim_{\leftarrow}(p,q) \xrightarrow{\pi_2} Q \rightarrow 0
+    \end{align*}
+    Observe: 
+    \begin{align*}
+        \ker(\pi_1) &= \{(x,y) \in \lim_{\leftarrow}(p,q): p(x) = q(y) \land x = 0 \}\\
+                    &= \{(0,y) \in \lim_{\leftarrow}(p,q): q(y) = 0\}\\
+                    &\cong \ker(q) = J                   
+    \end{align*}
+    So we get two exact sequences by symmetry:
+    \begin{align*}
+        0 \rightarrow J \rightarrow \lim_{\leftarrow}(p,q) \xrightarrow{\pi_1} P \rightarrow 0\\
+        0 \rightarrow I \rightarrow \lim_{\leftarrow}(p,q) \xrightarrow{\pi_2} Q \rightarrow 0
+    \end{align*}
+    Since $P$ and $Q$ are projective, both sequenes split hence $\lim_{\leftarrow}(p,q) \cong P \oplus J$ and $\lim_{\leftarrow}(p,q) = Q \oplus I$
+\end{proof}
+
+\begin{proposition}(Dimension Shift) \label{DimShift}
+    Let $0 \rightarrow K \rightarrow P_0 \rightarrow M \rightarrow 0$ be an exact sequence of $\Lambda$-modules. If $P_0$ is projective then $H^n(K,N) \cong H^{n+1}(M,N)$ for all $\Lambda$-modules $N$. 
+\end{proposition}
+\begin{proof}
+    Apply the contravariant functor $Hom(-, N)$ and apply the mayer-vietoris theorem to get a long exact sequence in cohomology: 
+    \begin{align*}
+        \dots \rightarrow H^n(M,N) \rightarrow H^n(P_0, N) \rightarrow H^n(K,N) \xrightarrow{\delta} H^{n+1}(M,N) \rightarrow H^{n+1}(P_0, N) \rightarrow \dots
+    \end{align*}
+    for a particular $n \leq 1$. But $H^n(P_0, N) = 0$ for all $n \geq 1$ since it is projective, so for a particular $n \geq 1$ we have: 
+    \begin{align*}
+        0 \rightarrow H^n(K,N) \xrightarrow{\delta} H^{n+1}(M,N) \rightarrow 0
+    \end{align*}
+    Which implies that $\delta$ is an isomorphism, so $H^n(K,N) \cong H^{n+1}(M,N)$.  
+\end{proof}
+
+\begin{remark}
+    Suppose that we have some long exact sequence 
+    \begin{align*}
+        0 \rightarrow P_n \xrightarrow{\partial^{n}} P_{n-1} \xrightarrow{\partial^{n-1}} \dots \xrightarrow{\partial^1} P_0 \xrightarrow{\partial^0} M \rightarrow 0
+    \end{align*}
+    Define\footnote{Note that these are called the nth syzygies of $M$, from the greek syzygos meaning "yoked together"} $K_n = \ker{\partial^n}$, then we get a family of short exact sequences as follows. Clearly for $n = 0$
+    \begin{align*}
+        0 \rightarrow K_0 \rightarrow P_0 \xrightarrow{\partial^0} M \rightarrow 0 
+    \end{align*}
+    is exact by definition. Then for $n=1$:
+    \begin{align*}
+        0 \rightarrow K_1 \rightarrow P_1 \xrightarrow{\partial^1} K_0 \rightarrow 0 
+    \end{align*}
+    is exact since $im(\partial^1) = \ker(\partial^0) = K_0$ by exactness, so $\partial^1$ is surjective. We can continue this pattern up to: 
+    \begin{align*}
+        0 \rightarrow K_n \rightarrow P_n \xrightarrow{\partial^{n}} K_{n-1} \rightarrow 0 
+    \end{align*}
+    But $\partial^n$ is injective, so $K_n = 0$ and thus $P_n \cong K_{n-1}$. 
+\end{remark}
+
+\begin{proposition}
+    Suppose we have a long exact sequence
+    \begin{align*}
+        0 \rightarrow K \xrightarrow{\partial^{n}} P_{n-1} \xrightarrow{\partial^{n-1}} \dots \xrightarrow{\partial^1} P_0 \xrightarrow{\partial^0} M \rightarrow 0
+    \end{align*}
+    of $\Lambda$-modules. Then $K$ is projective iff $H^{n+1}(M,N) = 0$ for all $n \in \mathbb{N}$ and all coefficient modules $N$. 
+\end{proposition}
+\begin{proof}
+    From the above remark with $P_n := K$ we get a family of short exact sequences. 
+    \begin{align*}
+        0 \rightarrow K_0 \rightarrow &P_0 \rightarrow M \rightarrow 0 \\
+        0 \rightarrow K_1 \rightarrow &P_1 \rightarrow K_0 \rightarrow 0 \\
+        &\; \vdots\\
+        0 \rightarrow K \rightarrow &P_{n-1} \rightarrow K_{n-1}
+    \end{align*}
+    Then from repeated applications of Proposition \ref{DimShift} we get: 
+    \begin{align*}
+        H^{n+1}(M,N) &\cong H^n(K_0,N)\\
+        H^n(K_0, N)  &\cong H^{n-1}(K_1, N)\\
+                     &\; \vdots\\
+        H^2(K_{n-1}, N) & \cong H^1(K,N) 
+    \end{align*}
+    so $H^1(K,N) \cong H^{n+1}(M,N)$ which is zero iff $K$ is projective. 
+\end{proof}   
+
+
+\begin{proposition}
+    $P$ and $Q$ are projective iff $P \oplus Q$ are projective. 
+\end{proposition}
+\begin{proof}
+    Assume that $P$ and $Q$ are projective, then by the summand definition there exists modules $K$ and $K'$ such that $F \cong P \oplus K$ and $F' \cong Q \oplus K'$ where $F$ and $F'$ are free modules. Then $F \oplus F' = (P \oplus K) \oplus (Q \oplus K') = (P \oplus Q) \oplus (K \oplus K')$. Since the sum of free modules is still free (easy to show) $P \oplus Q$ is a summand of a free module and is thus projective. \\
+    Conversely assume that $P \oplus Q$ is projective. Then there exists a module $K$ such that $F \cong (P \oplus Q) \oplus K$ where $F$ is free. Then by associativity we have $F \cong P \oplus (Q \oplus K)  = Q \oplus (P \oplus K)$. Hence $P$ and $Q$ are both projective by the summand definition.  
+\end{proof}
 
 \chapter{Finiteness Conditions}
 \section{Projective and Cohomological Dimension}
@@ -1104,8 +1280,19 @@ This is very important, if we see
 We can get the converse via dimension shifting, so therefore we have: 
 
 \begin{proposition}
-    $cd(M) \leq n$ iff $pd(M) \leq n$. So 
+     $pd(M) \leq n$ iff $cd(M) \leq n$.
 \end{proposition}
+\begin{proof}
+    Forward direction proved above. For backwards direction take a projective resolution of $M$ 
+    \begin{align*}
+        \dots \rightarrow P_n \xrightarrow{\partial_n} P_{n-1} \xrightarrow{\partial_{n-1}} \dots \xrightarrow{\partial_1} P_0 \xrightarrow{\partial_0} M \rightarrow 0
+    \end{align*}
+    Defining $K = \ker(\partial_{n-1}) = im(\partial_n)$ gives us an exact sequence.
+    \begin{align*}
+        0 \rightarrow K  \xrightarrow{\partial_n} P_{n-1} \xrightarrow{\partial_{n-1}} \dots \xrightarrow{\partial_1} P_0 \xrightarrow{\partial_0} M \rightarrow 0
+    \end{align*}
+    Then using the dimension shifting argument from \ref{DimShift}, we have that $H^{n+1}(M,N) = H^1(K,N)$. If cd($M$) $\leq n$ this implies that $H^{n+1}(M,N) = 0 = H^1(K,N)$. This then means that $K$ is projective so the above sequence is a projective resolution of length $n$, so pd($M$) $\leq n$. 
+\end{proof}
 
 \begin{definition}
     Let $\Lambda$ be a ring. We say that the global dimension of $\Lambda$ $gd(\Lambda) \leq n \iff H^{n+1}(M,N) = 0$ for all $\Lambda$-modules $M,N$. That is to say $cd(M) \leq n$ for all $\Lambda$-modules $M$. Moreover, every modules $M$ has projective resolution of length at most $n$. 
@@ -1116,7 +1303,7 @@ We can get the converse via dimension shifting, so therefore we have:
 This section will go into detail on what are known as noetherian rings and modules. Although there are a few characterisations, the intuitive way to understand them is that they have a "general finiteness" condition, allowing us to treat complex algebraic objects as essentially finite. Before the definition of a noetherian ring was formalised, Hilbert characterised them as being "not too large". 
 
 \begin{definition}
-    Let $\Lambda$ be a ring, and $M$ a $\Lambda$-module. $M$ is \textbf{noetherian} if when given a sequences of submodules $(M_r)_{r \in \mathbb{N}}$ such that $M_r \subsetneq M_{r+1}$ then $\exists n$ such that $M_r = M_n$ for all $r >n$. I.e. the descending chain terminates. 
+    Let $\Lambda$ be a ring, and $M$ a $\Lambda$-module. $M$ is \textbf{noetherian} if when given a sequences of submodules $(M_r)_{r \in \mathbb{N}}$ such that $M_r \subsetneq M_{r+1}$ then $\exists n$ such that $M_r = M_n$ for all $r >n$. I.e. the ascending chain terminates. 
 \end{definition}
 
 It is important to note that there is an equivalent definition to noetherian modules in that $M$ is noetherian if every submodule of $M$ is finitely generated. Showing that our definition above and this definition is equivalent requires assuming the axiom of choice, which for the most part, we are not doing in this course!
@@ -1124,20 +1311,39 @@ It is important to note that there is an equivalent definition to noetherian mod
 \begin{proposition}
     If $M$ is noetherian, then $M$ is finitely generated over $\Lambda$.     
 \end{proposition}
+\begin{proof}
+    If $\{e_1, \dots, e_n\} \subset M$, define $[e_1, \dots, e_n) = \{\sum^n_{i=1}e_i \lambda_i : \lambda_i \in \Lambda\}$ as the submodule genereated by those elements.
+    Choose some $e_1 \in M$. If $M = [e_1)$, then we are done. Otherwise choose $e_2 \in M\setminus [e_1)$. Again, if $M = [e_1, e_2)$ then we are done.\\ Suppose that we continue this process $n$ elements $\{e_1, \dots, e_n\} \subset M$ where $[e_1, \dots, e_n) \neq M$. Then choose $e_{n+1} \in M \setminus [e_1, \dots, e_n)$. \\Suppose we can continue this indefinitely, then if we define $M_r = [e_1, \dots, e_r)$, we get an indefinite ascending chain of submodules $M_r \subset M_{r+1}$. $M$ is noetherian so this must terminate, i.e. $\exists n$ s.t. $M = [e_1, \dots, e_n)$
+\end{proof}
 
 \begin{proposition}
     If $M$ is noetherian, any $\Lambda$-submodule of $M$ is noetherian. 
 \end{proposition}
+\begin{proof}
+    Let $K \subset M$ be a submodule of $M$. Take an ascending chain of submodules inside $K$: $K_1 \subset K_2 \subset K_3 \subset \dots$. Each $K_i$ is also submodule of $M$ and so by the definition of $M$ being noetherian this chain must terminate. Hence $K$ is also noetherian since any ascending chain of submodules terminates. 
+\end{proof}
 
 \begin{proposition}
     Let $p : M \to Q$ be a surjective $\Lambda$-homomorphism. If $M$ is noetherian then $Q$ is noetherian.  
 \end{proposition}
+\begin{proof}
+    Let $(Q_r)_{0 \leq r}$  be an ascending sequence of $\Lambda$-modules in $Q$. Then since $p$ is surjective, $p^{-1}(Q_r)$ is an ascending sequence of $\Lambda$-modules in $M$.\\
+    $M$ is noetherian, so $\exists N$ such that $\forall r \geq N$, $p^{-1}(Q_r) = p^{-1}(Q_N)$. Since $p$ is surjective, applying $p$ to both sides of this equations gives $Q_r = Q_N$ for all $r \geq N$. Hence $Q$ is noetherian. 
+\end{proof}
 
 Now we actually get to use a bit of our homological stuff! 
 
 \begin{proposition}
-    Let $0 \rightarrow K \xrightarrow{i} M \xrightarrow{p} Q \rightarrow 0$ be an SES of of $\Lambda$-modules. If $K$ and $Q$ are finitely generated, then $M$ is. 
+    Let $0 \rightarrow K \xrightarrow{i} M \xrightarrow{p} Q \rightarrow 0$ be an SES of of $\Lambda$-modules. $K$ and $Q$ are noetherian iff $M$ is noetherian.  
 \end{proposition}
+\begin{proof}
+    Assume that $K$ and $Q$ are noetherian. Let $N \subseteq M$ be a submodule of $M$. $K \cap N$ is a submodule of $K$, and since $K$ is noetherian, $K \cap N$ is finitely generated. Similarly, $p(N)$ is a submodule of $Q$, and thus is also finitely generated as $Q$ is noetherian. Take a generating set for both, noting that the sequence: 
+    \begin{align*}
+        0 \rightarrow K \cap N \rightarrow N \rightarrow p(N) \rightarrow 0 
+    \end{align*}
+    is exact. Then the union of each generating set generates $N$. \\
+    Now assume that $M$ is noetherian. $K$ is clearly noetherian since it is a submodule of $M$. $Q$ is also noetherian since $p$ is a surjective homomorphism. 
+\end{proof}
 
 This leads to one of the most famous theorems in the history of mathematics
 
@@ -1145,13 +1351,7 @@ This leads to one of the most famous theorems in the history of mathematics
     (Hilbert's Basis Theorem 1890) Let $R$ be a commutative Noetherian ring. Then $R[t]$ is also noetherian. 
 \end{theorem}
 
-Which then leads to the next theorem, which I am including just because I like the name: 
-
-\begin{theorem}
-    (Hilbert's Syzygy Theorem) If $gd(R) = n$ then $gd(R[t]) = n + 1$. 
-\end{theorem}
-
-This is a crazy important theorem!
+I won't (at the moment) include the proof for this theorem, but it was noted as being one of the first proofs to use non-constructive methods. Although this is commonplace nowadays, it caused a great shock in the mathematical community when first published, eliciting reactions such as "This is not mathematics, it is theology" from Paul Gordan. 
 
 \section{Classification of Modules over PIDs}
 In this section, we will classify all finitely generated modules oversome commutative principal ideal domain. We will actually find out there are only 3 options! But first we will do a bit of recap. 
@@ -1159,6 +1359,26 @@ In this section, we will classify all finitely generated modules oversome commut
 \begin{definition}
     Let $R$ be a commutative ring. $R$ is a \textbf{principal ideal ring} if every ideal in $R$ (i.e. submodule, of the module $R$ over itself) is generated by a single element. $R$ is a \textbf{principal ideal domain} if it is also an integral domain\footnote{no nonzero zero divisors}
 \end{definition}
+
+\begin{example}
+    Examples of PIDs include 
+    \begin{itemize}
+        \item The integers $\mathbb{Z}$, through euclidean division. 
+        \item Fields ($\mathbb{Q}, \mathbb{R}, \mathbb{C}$)
+        \item Polynomial rings over a field $k$, $k[x]$, also through euclidean division. 
+        \item Gaussian integers, $\mathbb{Z}[i]$
+    \end{itemize}
+    Some examples of PIRs which are NOT PIDs include: 
+    \begin{itemize}
+        \item Integers Mod $n$ where $n$ is a composite number. 
+        \item Finite products of PIDs. 
+    \end{itemize}
+    Some examples of rings which are NOT either include: 
+    \begin{itemize}
+        \item $\mathbb{Z}[x]$ since the ideal $(2,x)$ is not principle. 
+        \item $F[x,y]$, even if $F$ is a field is not a PIR since $(x,y)$ cannot be generated by a single element. 
+    \end{itemize}
+\end{example}
 
 \begin{proposition}
     If $R$ is a PIR, then $R$ is noetherian. 
@@ -1170,6 +1390,11 @@ In this section, we will classify all finitely generated modules oversome commut
 \begin{corollary}
     If $R$ is a PIR, then $R[t_1, \dots, t_n]$ is noetherian. 
 \end{corollary}
+\begin{proof}
+    Since $R$ is a PIR, by the above proposition, it is noetherian. Then by Hilbert's Basis Theorem, $R[t]$ is noetherian. Simply iterate this process. 
+\end{proof}
+
+Beware! $R[t_1, t_2, \dots]$ is not noetherian. 
 
 \subsection{Torsion}
 For this entire section, assume that $R$ is a commutative PID. 
@@ -1180,6 +1405,9 @@ For this entire section, assume that $R$ is a commutative PID.
 \begin{proposition}
     $\Theta(M)$ is, in fact, a submodule of $M$. 
 \end{proposition}
+\begin{proof}
+    Immediate check of submodule axioms. 
+\end{proof}
 
 \begin{definition}
     We say that $M$ is \textbf{torsion free} when $\Theta(m) = 0$ 
@@ -1264,10 +1492,11 @@ To prove this we need two lemmas:
 So $M$ always splits into its torsion submodule and a free module. Free modules are easy to work with, so now we have to deal with the torsion submodule. For now, let $R$ be a commutative noetherian integral domain (not necessarily principal).
 
 \begin{definition}
-    Let $a \in R$ such that $a \neq 0$ and $M \in Mod_R$, then define $\Theta_a(m) = \{m \in M: ma = 0$. 
+    Let $a \in R$ such that $a \neq 0$ and $M \in Mod_R$, then define $\Theta_a(m) = \{m \in M: ma = 0\}$. 
 \end{definition}
 
 \begin{proposition}
+    \label{Identification of Torsion Module}
     If $M$ is finitely generated over $R$ then $\exists a \in R$ where $a \neq 0$ such that $\Theta(M) = \Theta_a(M)$
 \end{proposition}
 \begin{proof}
@@ -1287,9 +1516,18 @@ Okay, so we can identify the torsion submodule with a particular $a$-torsion mod
 
 And we say that $(b,c)$ is coprime when $(b,c) = (1) = R$
 
-\begin{proposition}
-    If $a = bc$ and $(b,c) = 1$ then $\Theta_a(M) = \Theta_b(M) \dot{\oplus} \Theta_c(M)$ where $\dot{\oplus}$ is the internal direct sum\footnote{for a longer discussion on internal vs external direct sum, see the appendix}
-\end{proposition}
+\begin{lemma}
+    If $a = bc$ and $(b,c) = 1$ then $\Theta_a(M) = \Theta_b(M) \dot{+} \Theta_c(M)$ where $\dot{+}$ is the internal direct sum\footnote{for a longer discussion on internal vs external direct sum, see the appendix}
+\end{lemma}
+\begin{proof}
+    First prove that $\Theta_a(M) = \Theta_b(M) + \Theta_c(M)$. Since $b$ and $c$ are coprime, we have that $\exists \lambda, \mu \in R$ such that $\lambda b + \mu c = 1_R$. Hence for $m \in \Theta_a(M)$ we have $\lambda b m + \mu c m = m$. \\
+    $\lambda b m \in \Theta_c(M)$ since $\lambda b c m = \lambda a m = 0$ and similarly $\mu c m \in \Theta_b(M)$.\\
+    Now to prove directness, let $x \in \Theta_b(M) \cap \Theta_c(M)$. Observe 
+    \begin{align*}
+        x = (\lambda b + \mu c)x = \lambda b x + \mu b x = 0 + 0 = 0
+    \end{align*}
+    Hence $\Theta_b(M) \cap \Theta_c(M) = \{0\}$
+\end{proof}
 
 Now we can finally get to our second step in the classification theorem. Note that here we now do require $R$ to also be a commuatative PID.
 
@@ -1299,6 +1537,10 @@ Now we can finally get to our second step in the classification theorem. Note th
         \Theta(M) = \Theta_a(M) = \Theta_{{p_1}^{e_1}}(M) \oplus \dots \oplus \Theta_{{p_n}^{e_n}}(M)
     \end{align*}
 \end{theorem}
+\begin{proof}
+    From \ref{Identification of Torsion Module} we can get some $a \in R\setminus \{0\}$ such that $\Theta(M) = \Theta_a(M)$. Since $R$ is a PID, it is a UFD, and so therefore $a$ can be written as a product of prime factors i.e. $a = p_1^{e_1} \dots p_n^{e_n}$ where $p_1, \dots, p_n$ are pairwise distinct primes, and $e_1, \dots, e_n \in \mathbb{N}$.\\
+    If $n=1$, then we have that $\Theta_a(M) = \Theta_{p_1^{e_1}}$ and we are done. Otherwise let $b =  p_1^{e_1} \dots p_{n-1}^{e_{n-1}}$ and $c = q_n^{e_n}$. Clearly $a = bc$ and $b$ and $c$ are coprime, so applying the above lemma gives $\Theta_a(M) = \Theta_b(M) \oplus \Theta_c(M)$. Then proceed by induction on $b$. 
+\end{proof}
 
 
 Now, our problem is reduced into classifying the indivdual $p$-torsion submodules. Luckily, as ever, we have a theorem for this: 
@@ -1310,11 +1552,14 @@ Now, our problem is reduced into classifying the indivdual $p$-torsion submodule
     \end{align*}
 \end{theorem}
 
-The proof of this is horrible and requires Baer's theorem so whatever. But once we've proved it, we get our full classification theorem: 
+The proof of this is horrible and does some double induction that requires Baer's theorem so whatever. But once we've proved it, we get our full classification theorem: 
 
 \begin{theorem}
     (Classification theorem) Let $M$ be a finitely generated module over a commutative PID $R$. Then $M = R^n \oplus (\bigoplus^{m}_{i = 1} R/p^{e_i})$ for some $m$. 
 \end{theorem}
+\begin{proof}
+    Apply the steps in sequence. 
+\end{proof}
 
 This is awesome! The first immediate result we get from this is about the global dimension of particular rings. First lets do a few examples. 
 
@@ -1368,7 +1613,7 @@ and
 \begin{align*}
     D_* = ( \dots \rightarrow D_n \xrightarrow{\partial^D_n} D_{n-1} \rightarrow \dots \rightarrow D_0 \xrightarrow{\partial^D_0} D \rightarrow 0)
 \end{align*}
-then there is a lifting of $f$ to $f_*$ such that $f_*: C_* \to D_*$ is a chain mapping i.e
+we proved in \ref{Lifting of Chain Complexes} that there exists a lifting of $f$ to $f_*$ such that $f_*: C_* \to D_*$ is a chain mapping i.e
 \[
 \begin{tikzcd}
     \dots \arrow[r] & C_n \arrow[r, "\partial^C_n"] \arrow[d, "f_n"]
