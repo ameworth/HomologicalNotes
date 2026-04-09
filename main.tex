@@ -1711,6 +1711,81 @@ Thus by the algebraic Mayer-Vietoris theorem, chain version we get a long exact 
     Since the homology for $M(f)$ is zero for all $n$ aside from $n = 0$ where its isomorphic to $E$, this implies $M(f)_*$ is a resolution for $E$.
 \end{proof}
 \chapter{Koszul Resolution}
+\section{Two-Variable Case}
+In this section, we develop a technique on how to compute a resolution of $\mathbb{Z}$ over $\mathbb{Z}[x,y]$. Recall that we already have a resolution of $\mathbb{Z}$ over $\mathbb{Z}[x]$ given by: 
+\begin{align*}
+    0 \rightarrow Z[x] \xrightarrow{\cdot x} \mathbb{Z}[x] \xrightarrow{\epsilon} \mathbb{Z} \rightarrow 0
+\end{align*}
+Where $\epsilon$ is the augmentation map. From this, we have a resolution for $\mathbb{Z}[y]$ over $\mathbb{Z}[x,y]$ given by: 
+\begin{align*}
+    0 \rightarrow \mathbb{Z}[x,y] \xrightarrow{\cdot x} \mathbb{Z}[x,y] \xrightarrow{\epsilon \otimes 1} \mathbb{Z}[y] \rightarrow 0 
+\end{align*}
+Where we are regarding $\mathbb{Z}[x] \otimes_\mathbb{Z} \mathbb{Z}[y] = \mathbb{Z}[x,y]$ and so $(\epsilon \otimes 1)(f(x)\otimes g(y)) = f(0) \cdot g(y)$ which are polynomials in $y$ only. Putting this together, we get the following diagram: 
+\[
+\begin{tikzcd}
+    & 0 \arrow[d] & 0 \arrow[d] &\\
+    & C_1 : = \mathbb{Z}[x,y] \arrow[d, "\cdot x"] \arrow[r, "\cdot y"] & \mathbb{Z}[x,y] =: D_1 \arrow[d, "\cdot x"] &\\
+    & C_0 := \mathbb{Z}[x,y] \arrow[d, "\epsilon \otimes 1"] \arrow[r, "\cdot y"] & \mathbb{Z}[x,y] = :D_0 \arrow[d, "\epsilon \otimes 1"] &\\
+    0 \arrow[r] & \mathbb{Z}[y] \arrow[r, "\cdot y"] & \mathbb{Z}[y] \arrow[r] & \mathbb{Z} \arrow[r] & 0
+\end{tikzcd}
+\]
+Where we have lifted the map $\cdot y : \mathbb{Z}[y] \to \mathbb{Z}[y]$ from the bottom to the give maps from $\mathbb{Z}[x,y] \to \mathbb{Z}[x,y]$ as in \ref{Lifting of Chain Complexes}. In this sense, we can just treat $\cdot y$ as a chain mapping between $C_*$ and $D_*$. \\
+
+Now, take the mapping cone $M(\cdot y)$ of this chain mapping. Then $M_2(\cdot y) = D_2 \oplus C_1 = 0 \oplus C_1 = C_1$, $M_1(\cdot y) = D_1 \oplus C_1$, and $M_0 (\cdot y)= D_0 \oplus C_{-1} = D_0 \oplus 0 = D_0$. Thus giving us the sequence: 
+\begin{align*}
+    C_1 \xrightarrow{\partial_2^M} D_1 \oplus C_0 \xrightarrow{\partial_1^M} D_0
+\end{align*}
+Where using the definition of the mapping cone: 
+\begin{align*}
+    \partial^M_2 = 
+    \begin{pmatrix}
+        \partial^D_2 & (-1)^{2-1}y\\
+        0            & \partial_1^C
+    \end{pmatrix} \text{ and }
+    \partial^M_1 = 
+    \begin{pmatrix}
+        \partial^D_1 & (-1)^{1-1}y \\
+        0            & \partial^C_0
+    \end{pmatrix}
+\end{align*}
+Since $\partial^D_2 = 0$, $\partial^C_1 = \cdot x$ and $\partial^D_1 = \cdot x$, $\partial^C_0 = 0$, we have: 
+\begin{align*}
+    \partial^M_2 = 
+    \begin{pmatrix}
+        0 & -y\\
+        0 & x
+    \end{pmatrix} = 
+    \begin{pmatrix}
+        -y\\
+        x
+    \end{pmatrix} \text{ and }
+    \partial^M_1 = 
+    \begin{pmatrix}
+        x & y \\
+        0 & 0
+    \end{pmatrix} = 
+    \begin{pmatrix}
+        x & y
+    \end{pmatrix}
+\end{align*} 
+So if we splice this with the original resolution for $\mathbb{Z}$ we get: 
+\begin{align*}
+    0 \rightarrow \mathbb{Z}[x,y] \xrightarrow{\left(\begin{smallmatrix} -y \\ x \end{smallmatrix}\right)} \mathbb{Z}[x,y] \oplus \mathbb{Z}[x,y] \xrightarrow{(x,y)} \mathbb{Z}[x,y] \xrightarrow{\eta} \mathbb{Z} \rightarrow 0
+\end{align*}
+Where $\eta$ is the double augmentation map (i.e. sends $x$ and $y$ both to zero). The sequence is exact in the middle positions from the construction of the mapping cone and the fact that $Im((x,y)) = \ker{\eta}$. The maps on the side can easily be shown to be injective/surjective respectively, so we have a resolution for $\mathbb{Z}$ over $\mathbb{Z}[x,y]$. 
+
+Now observe what happens when we dualise\footnote{Note that dualising in this context is shorthand for taking $Hom_{\mathbb{Z}[x,y]}(- , \mathbb{Z}[x,y])$}. Since we are dealing with matrices/vectors, dualising just involves taking the transpose, so we get:
+\begin{align*}
+    0 \rightarrow \mathbb{Z}[x,y] \xrightarrow{\left(\begin{smallmatrix} x \\ y \end{smallmatrix}\right)} \mathbb{Z}[x,y] \oplus \mathbb{Z}[x,y] \xrightarrow{(-y,x)} \mathbb{Z}[x,y] \rightarrow 0 
+\end{align*}
+Remembering that dualising is contravariant. Then If we then do the change of variables $x \mapsto -y$ and $y \mapsto x$ (which doesn't change the kernels or images), we get 
+\begin{align*}
+    0 \rightarrow \mathbb{Z}[x,y] \xrightarrow{\left(\begin{smallmatrix} -y \\ x \end{smallmatrix}\right)} \mathbb{Z}[x,y] \oplus \mathbb{Z}[x,y] \xrightarrow{(x,y)} \mathbb{Z}[x,y] \rightarrow 0 
+\end{align*}
+Thus recovering the original resolution!
+
+\section{Three-Variable Case}
+We now repeat this process to get a resolution of $\mathbb{Z}$ over $\mathbb{Z}[x,y,z]$. 
 
 \chapter{Appendix}
 \section{Category Theory}
