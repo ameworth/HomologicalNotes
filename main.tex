@@ -1710,6 +1710,16 @@ Thus by the algebraic Mayer-Vietoris theorem, chain version we get a long exact 
     $f$ is injective from the original exact sequence, hence $ker(f) = 0$ implying that $H_1(M(f)) = 0$. By first isomorphism theorem since the map $D \to H_0(M(f))$ is surjective, and the kernel of this map is equal to $im(f)$ by exactness $D/ker(D \to H_0(M(f))) = D/im(f) \cong H_0(M(f))$ and from the original sequence $D/im(f) = E$ we have that $E \cong H_0(M(f))$. \\
     Since the homology for $M(f)$ is zero for all $n$ aside from $n = 0$ where its isomorphic to $E$, this implies $M(f)_*$ is a resolution for $E$.
 \end{proof}
+With this construction, we are ready to prove Hilbert's Syzygy Theorem. 
+\begin{theorem}
+    (Hilbert's Syzygy Theorem) If $R$ is a commutative ring, and $R[t]$ a polynomial ring in one variable, then $gd(R[t]) = gd(R) + 1$. In particular:
+    \begin{align*}
+        gd(R[t_1, \dots, t_n]) = gd(R) + n
+    \end{align*}
+\end{theorem}
+\begin{proof}
+    We won't actually prove this because its one of those silly huge proofs that for some reason introduces the tensor operation and I just cannot be bothered. 
+\end{proof}
 \chapter{Koszul Resolution}
 \section{Two-Variable Case}
 In this section, we develop a technique on how to compute a resolution of $\mathbb{Z}$ over $\mathbb{Z}[x,y]$. Recall that we already have a resolution of $\mathbb{Z}$ over $\mathbb{Z}[x]$ given by: 
@@ -1785,7 +1795,75 @@ Remembering that dualising is contravariant. Then If we then do the change of va
 Thus recovering the original resolution!
 
 \section{Three-Variable Case}
-We now repeat this process to get a resolution of $\mathbb{Z}$ over $\mathbb{Z}[x,y,z]$. 
+We now repeat this process to get a resolution of $\mathbb{Z}$ over $\mathbb{Z}[x,y,z]$. Introduce a new variable $z$ and as before take the obvious resolution over $\mathbb{Z}[z]$: 
+\begin{align*}
+    0 \rightarrow \mathbb{Z}[z] \xrightarrow{\cdot z} \mathbb{Z}[z] \rightarrow \mathbb{Z} \rightarrow 0 
+\end{align*}
+Now, if we label $C_2 := \mathbb{Z}[x,y,z] =: D_2$, $C_1 := \mathbb{Z}[x,y,z] \oplus \mathbb{Z}[x,y,z] =: D_1$ and $C_0 := \mathbb{Z}[x,y,z] =: D_0$, as in our previous construction, we get the following diagram: 
+\[
+\begin{tikzcd}
+    & 0 \arrow[d] & 0 \arrow[d] &\\
+    & C_2 \arrow[d, "\partial^C_2"] \arrow[r, "\cdot z"] & D_2 \arrow[d, "\partial^D_2"]\\ 
+    & C_1  \arrow[d, "\partial^C_1"] \arrow[r, "\cdot z"] & D_1 \arrow[d, "\partial^D_1"] &\\
+    & C_0  \arrow[d] \arrow[r, "\cdot z"] & D_0 \arrow[d] &\\
+    0 \arrow[r] & \mathbb{Z}[z] \arrow[r, "\cdot z"] & \mathbb{Z}[z] \arrow[r] & \mathbb{Z} \arrow[r] & 0
+\end{tikzcd}
+\]
+Where we have treated have lifted $\times z : \mathbb{Z}[z] \to \mathbb{Z}[z]$ into a chain mapping between $C_*$ and $D_*$. Now take the mapping cone $M(z)$ of this chain mapping to give: 
+\begin{align*}
+    &M_3(z) = D_3 \oplus C_2 = 0 \oplus C_2 = \mathbb{Z}[x,y,z]\\
+    &M_2(z) = D_2 \oplus C_1 = \mathbb{Z}[x,y,z] \oplus \mathbb{Z}[x,y,z]^{(2)} = \mathbb{Z}[x,y,z]^{(3)}\\
+    &M_1(z) = D_1 \oplus C_0 = \mathbb{Z}[x,y,z]^{(2)} \oplus \mathbb{Z}[x,y,z] = \mathbb{Z}[x,y,z]^{(3)}\\
+    &M_0(z) = D_0 \oplus C_{-1} = D_0 \oplus 0 = \mathbb{Z}[x,y,z]
+\end{align*}
+
+and as before we get 
+\begin{align*}
+    \mathbb{Z}[x,y,z] \xrightarrow{\partial^M_3} \mathbb{Z}[x,y,z]^{(3)} \xrightarrow{\partial^M_2} \mathbb{Z}[x,y,z]^{(3)} \xrightarrow{\partial^M_1} \mathbb{Z}[x,y,z]
+\end{align*}
+
+Where the maps are given by: 
+\begin{align*}
+    &\partial^M_3 = 
+    \begin{pmatrix}
+        \partial^D_3 & (-1)^{3-1}z\\
+        0            & \partial^C_2
+    \end{pmatrix}
+    = 
+    \begin{pmatrix}
+        z\\
+        -y\\
+        x
+    \end{pmatrix}\\
+    &\partial^M_2 =
+    \begin{pmatrix}
+        \partial^D_2 & -z \\
+        0            & \partial^C_1
+    \end{pmatrix}
+    = 
+    \begin{pmatrix}
+        -y & -z & 0 \\
+        x  & 0  & -z \\
+        0  & x  & y 
+    \end{pmatrix}\\
+    &\partial^M_1 =
+    \begin{pmatrix}
+        \partial^D_1 z
+    \end{pmatrix}
+    =
+    \begin{pmatrix}
+        x & y & z
+    \end{pmatrix}
+\end{align*}
+Recalling that $\partial^D_3 = 0$, $\partial^C_2 = \partial^D_2 = \begin{pmatrix}
+    -y \\
+    x
+\end{pmatrix}$, and $\partial^D_1 = \partial^C_1 = (x \, y)$. If we splice this with our original resolution, we thus get:
+\begin{align*}
+        0 \rightarrow \mathbb{Z}[x,y,z] \xrightarrow{\left(\begin{smallmatrix} z \\ -y \\ x \end{smallmatrix}\right)} \mathbb{Z}[x,y,z]^{(3)} \xrightarrow{\left(\begin{smallmatrix}
+        -y & -z & 0 \\ x  & 0  & -z \\ 0  & x  & y \end{smallmatrix}\right)} \mathbb{Z}[x,y,z]^{(3)} \xrightarrow{\left(\begin{smallmatrix} x & y & z \end{smallmatrix} \right)} \mathbb{Z}[x,y,z] \rightarrow \mathbb{Z} \rightarrow 0 
+\end{align*}
+Which is a resolution of $\mathbb{Z}$ over $\mathbb{Z}[x,y,z]$ (exactness is tedious to check but just trust me). As before, if we dualise (take the transpose and reverse the order) and then apply a change of variables $z \mapsto x$, $-y \mapsto y$ and $x \mapsto z$, we recover the original resolution. 
 
 \chapter{Appendix}
 \section{Category Theory}
