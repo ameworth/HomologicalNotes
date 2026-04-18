@@ -608,7 +608,7 @@ The above theorem does not apply to the contravariant Hom functor. We need $D$ t
 
 We will see later, the study of how much $Hom_\Lambda(D, -)$ fails to be exact is one of the big areas of homological algebra. Note we have essentially the same results for the contravariant functor $Hom_\Lambda(-, D)$ in terms of failure to be exact and so on. We will end this section with a useful proposition about $Hom$.
 
-\begin{proposition}
+\begin{proposition}\label{Homid}
     Let $\Lambda$ be a ring and $A$ be an arbitrary $\Lambda$-module, then 
     \begin{align*}
         Hom_\Lambda(\Lambda, A) \cong A
@@ -2028,8 +2028,96 @@ Recalling that $\partial^D_3 = 0$, $\partial^C_2 = \partial^D_2 = \begin{pmatrix
         0 \rightarrow \mathbb{Z}[x,y,z] \xrightarrow{\left(\begin{smallmatrix} z \\ -y \\ x \end{smallmatrix}\right)} \mathbb{Z}[x,y,z]^{(3)} \xrightarrow{\left(\begin{smallmatrix}
         -y & -z & 0 \\ x  & 0  & -z \\ 0  & x  & y \end{smallmatrix}\right)} \mathbb{Z}[x,y,z]^{(3)} \xrightarrow{\left(\begin{smallmatrix} x & y & z \end{smallmatrix} \right)} \mathbb{Z}[x,y,z] \rightarrow \mathbb{Z} \rightarrow 0 
 \end{align*}
-Which is a resolution of $\mathbb{Z}$ over $\mathbb{Z}[x,y,z]$ (exactness is tedious to check but just trust me). As before, if we dualise (take the transpose and reverse the order) and then apply a change of variables $z \mapsto x$, $-y \mapsto y$ and $x \mapsto z$, we recover the original resolution. 
+Which is a resolution of $\mathbb{Z}$ over $\mathbb{Z}[x,y,z]$ (exactness is tedious to check but just trust me). As before, if we dualise (take the transpose and reverse the order) and then apply a change of variables $z \mapsto x$, $-y \mapsto y$ and $x \mapsto z$, we recover the original resolution. \\
 
+Right, now we can use these resolutions to calculate various cohomology groups. 
+\begin{example}Let $\Lambda = \mathbb{Z}[x,y,z]$.
+    \begin{itemize}
+
+    \item Calculate $H^k_\Lambda(\mathbb{Z}, \mathbb{Z})$\\
+    Take our projective resolution for $\mathbb{Z}$ over $\Lambda$: $ 0 \rightarrow \Lambda \xrightarrow{\partial_3} \Lambda^{(3)} \xrightarrow{\partial_2} \Lambda^{(3)} \xrightarrow{\partial_1} \Lambda \rightarrow \mathbb{Z} \rightarrow 0$, chop off the $\mathbb{Z}$, and apply the contravariant functor $Hom_\Lambda(-, \mathbb{Z})$. By \ref{Homid} we get the following SES: 
+    \begin{align*}
+        0 \rightarrow \mathbb{Z} \xrightarrow{\partial^*_1} \mathbb{Z}^{(3)} \xrightarrow{\partial^*_2} \mathbb{Z}^{3} \xrightarrow{\partial^*_3} \mathbb{Z} \rightarrow 0
+    \end{align*}
+    Note that $\mathbb{Z} = \Lambda/(x,y,z)$ so the transformative given by \ref{Homid} "evaluates" $x, y$, and $z$ at zero. Hence all the maps become zero. From here we can calculate the cohomology groups easily. 
+    \begin{align*}
+        H^0(\mathbb{Z}, \mathbb{Z}) &= \ker(0)/0 = \mathbb{Z}\\
+        H^1(\mathbb{Z}, \mathbb{Z}) &= \ker(0)/im(0) = \mathbb{Z}^{(3)}\\
+        H^2(\mathbb{Z}, \mathbb{Z}) &= \ker(0)/im(0) = \mathbb{Z}^{(3)}\\
+        H^3(\mathbb{Z}, \mathbb{Z}) &= \mathbb{Z}/im(0) = \mathbb{Z}
+    \end{align*}
+    $H^k(\mathbb{Z}, \mathbb{Z}) = 0$ for $k \geq 4$ since there are no quotients left to compute.
+    \item Calculate $H^k_\Lambda(\mathbb{Z}, \Lambda)$.\\
+    This is effectively dualising, so takes a lot less work as we know that the koszul resolution is self dual. Hence, taking $Hom_\Lambda( - , \Lambda)$ gives 
+    \begin{align*}
+        0 \rightarrow \Lambda \xrightarrow{\left(\begin{smallmatrix} z \\ -y \\ x \end{smallmatrix}\right)} \Lambda^{(3)} \xrightarrow{\left(\begin{smallmatrix}
+        -y & -z & 0 \\ x  & 0  & -z \\ 0  & x  & y \end{smallmatrix}\right)} \Lambda^{(3)} \xrightarrow{\left(\begin{smallmatrix} x & y & z \end{smallmatrix} \right)} \Lambda \rightarrow 0
+    \end{align*}
+    Since the sequence is exact, all cohomology groups are zero aside from $H^3(\mathbb{Z}, \Lambda) = \Lambda/im((x \,  y \,  z)) = \mathbb{Z}$
+    \end{itemize}
+\end{example}
+
+\begin{example}
+    Let $\mathcal{E} =  0 \rightarrow \Lambda \xrightarrow{\partial_3} \Lambda^{(3)} \xrightarrow{\partial_2} \Lambda^{(3)} \xrightarrow{\partial_1} \Lambda \xrightarrow{\eta} \mathbb{Z} \rightarrow 0$ be the free resolution we constructed in the previous example, where $\eta$ is the augmentation map. Put $I = \ker (\eta)$.
+    \begin{itemize}
+        \item Calculate $H^k(I, \mathbb{Z})$\\
+        Observe that we have a short exact sequence $0 \rightarrow I \rightarrow \Lambda \xrightarrow{\eta} \mathbb{Z} \rightarrow 0$. Applying $Hom_\Lambda(-, \mathbb{Z})$ akin to \ref{DimShift} we get that $H^k(I, \mathbb{Z}) \cong H^{k+1}(\mathbb{Z}, \mathbb{Z})$ for $k \geq 1$. However this doesn't work for $k = 0$ so we need to be a bit more sophisticated. Observe that we have: 
+        \begin{align*}
+            0 \rightarrow Hom(\mathbb{Z}, \mathbb{Z}) \xrightarrow{\eta^*} Hom(\Lambda, \mathbb{Z}) \rightarrow Hom(I, \mathbb{Z}) \rightarrow H^1(\mathbb{Z}, \mathbb{Z}) \rightarrow 0
+        \end{align*}
+        $Hom(\mathbb{Z}, \mathbb{Z}) = \mathbb{Z}$ from the previous example, $Hom(\Lambda, \mathbb{Z}) = \mathbb{Z}$ by \ref{Homid} and $H^1(\mathbb{Z}, \mathbb{Z}) = \mathbb{Z}^{(3)}$ from the previous example again. So we actually get: 
+        \begin{align*}
+            0 \rightarrow \mathbb{Z} \xrightarrow{\eta^*} \mathbb{Z} \rightarrow Hom(I, \mathbb{Z}) \rightarrow \mathbb{Z}^{(3)} \rightarrow 0 
+        \end{align*}
+        $\eta^*(f) (1_\Lambda)= f \circ \eta (1_\Lambda)  = f(1_\mathbb{Z})$ so $\eta^*(1) = 1$. Hence $\eta^*$ is an isomorphism and thus we can collapse the first two modules to give: 
+        \begin{align*}
+            0 \rightarrow Hom(I, \mathbb{Z}) \rightarrow \mathbb{Z}^{(3)} \rightarrow 0
+        \end{align*}
+        Thus giving $H^0(I, \mathbb{Z}) \cong \mathbb{Z}^{(3)}$.  
+        \item Calculate $H^k(I, \Lambda)$.\\
+        As before we can use dimension shifting. $H^k(I, \Lambda) \cong H^{k+1}(\mathbb{Z}, \Lambda)$ for $k \geq 1$. Hence for $k \geq 1$ we have that all cohomology groups are zero aside from $H^2(I, \Lambda) \cong H^3(\mathbb{Z}, \Lambda) = \mathbb{Z}$, Again, this doesn't work for $k = 0$ so observe that applying $Hom(-, \Lambda)$ to our short exact sequence from before and taking the long exact sequence in cohomology gives: 
+        \begin{align*}
+            0 \rightarrow Hom(\mathbb{Z}, \Lambda) \rightarrow Hom(\Lambda, \Lambda) \rightarrow Hom(I, \Lambda)  \rightarrow H^1(\mathbb{Z}, \Lambda) \rightarrow H^1(\Lambda, \Lambda) \rightarrow \dots 
+        \end{align*}
+        Using our previous results, $Hom(\mathbb{Z}, \Lambda) = 0 = H^1(\mathbb{Z}, \Lambda)$, $H^1(\Lambda, \Lambda) = 0$ as $\Lambda$ is free over itself, and $Hom(\Lambda, \Lambda) = \Lambda$ by \ref{Homid}. So we get
+        \begin{align*}
+            0 \rightarrow 0 \rightarrow \Lambda \rightarrow Hom(I, \Lambda) \rightarrow 0 \rightarrow 0
+        \end{align*}
+        So $\Lambda \cong Hom(I, \Lambda) = H^0(I, \Lambda)$.\\
+        Note that in theory we could've calculated the last two sets of cohomology groups by using the resolution $\mathcal{E}$, but this is much faster!
+        \item Calculate $H^k(\mathbb{Z}, I)$.\\
+        We can calculate this by either applying $Hom(\mathbb{Z}, -)$ or $Hom(-, I)$ to our SES $0 \rightarrow I \rightarrow \Lambda \rightarrow \mathbb{Z} \rightarrow 0$. For no reason in particular lets apply $Hom(\mathbb{Z}, -)$, giving: 
+        \begin{align*}
+            0 \rightarrow Hom(\mathbb{Z}, I) \rightarrow Hom(\mathbb{Z}, \Lambda) \rightarrow Hom(\mathbb{Z}, \mathbb{Z}) \rightarrow H^1(\mathbb{Z}, I) \rightarrow H^1(\mathbb{Z}, \Lambda) \rightarrow H^1(\mathbb{Z}, \mathbb{Z}) \rightarrow \dots
+        \end{align*}
+        For low $k = 0$, we know that $H^1(\mathbb{Z}, \Lambda) = 0$ so we get: 
+        \begin{align*}
+             0 \rightarrow Hom(\mathbb{Z}, I) \rightarrow Hom(\mathbb{Z}, \Lambda) \rightarrow Hom(\mathbb{Z}, \mathbb{Z}) \rightarrow H^1(\mathbb{Z}, I) \rightarrow 0 
+        \end{align*}
+        Which then when recalling that $H^0(\mathbb{Z}, \Lambda) = 0$ we get that $H^0(\mathbb{Z}, I) = 0$ and $H^0(\mathbb{Z}, \mathbb{Z}) = \mathbb{Z} = H^1(\mathbb{Z}, I)$. For $k = 2$ we have: 
+        \begin{align*}
+            0 \rightarrow H^1(\mathbb{Z}, \mathbb{Z}) \rightarrow H^2(\mathbb{Z}, I) \rightarrow H^2(\mathbb{Z}, \Lambda) \rightarrow 0 
+        \end{align*}
+        As $H^2(\mathbb{Z}, \Lambda) = 0$ we have $ H^2(\mathbb{Z}, I) \cong H^1(\mathbb{Z}, \mathbb{Z}) = \mathbb{Z}^{(3)}$. Similarly for $k = 3$: 
+        \begin{align*}
+            0 \rightarrow \mathbb{Z}^{(3)} \rightarrow H^3(\mathbb{Z}, I) \rightarrow \mathbb{Z} \xrightarrow{\alpha} \mathbb{Z} \rightarrow 0
+        \end{align*}
+        So as before we get that $H^3(\mathbb{Z}, I) \cong \mathbb{Z}^{(3)}$. Since we have $\mathcal{E}$ as a projective resolution for $\mathbb{Z}$, the projective dimension must be at most 3. Hence the cohomological dimension must be at most 3, meaning that for $k \geq 3$, $H^{k+1}(\mathbb{Z}, I) = 0$. So we don't get any higher cohomology.   
+        \item Calculate $H^k(I, I)$. \\
+        Apply $Hom_\Lambda(-, I)$ to our SES. By Dim Shifting, $H^k(I, I) \cong H^{k+1}(\mathbb{Z}, I)$. So $H^1(I, I) = \mathbb{Z}^{(3)}$, $H^2(I, I) \cong \mathbb{Z}^(3)$ and zero for higher cohomology groups. For $k = 0$ we have: 
+        \begin{align*}
+            0 \rightarrow Hom(\mathbb{Z},I) \rightarrow Hom(\Lambda, I) \rightarrow H^0(I, I) \rightarrow H^1(\mathbb{Z}, I) \rightarrow H^2(\Lambda, I) \rightarrow \dots 
+        \end{align*}
+        Subbing known values we get: 
+        \begin{align*}
+            0 \rightarrow I \rightarrow Hom(I, I) \rightarrow \mathbb{Z} \rightarrow 0
+        \end{align*}
+        You can work out yourself what this means. 
+        \item Show that there are infinitely many congruence classes of extensions of $\Lambda$ modules of the form $0 \rightarrow I \rightarrow X \rightarrow I \rightarrow 0$. By Baer's we have that $Ext(I, I) = H^1(I, I) = \mathbb{Z}^{(3)}$ which is an infinite group. Hence there are infinitely many congruence classes. 
+    \end{itemize}
+
+
+\end{example}
 \chapter{Appendix}
 \section{Category Theory}
 This is a small aside on category theory. 

@@ -22,6 +22,6 @@
 \contentsline {chapter}{\numberline {5}Koszul Resolution}{49}{chapter.5}%
 \contentsline {section}{\numberline {5.1}Two-Variable Case}{49}{section.5.1}%
 \contentsline {section}{\numberline {5.2}Three-Variable Case}{50}{section.5.2}%
-\contentsline {chapter}{\numberline {6}Appendix}{53}{chapter.6}%
-\contentsline {section}{\numberline {6.1}Category Theory}{53}{section.6.1}%
-\contentsline {chapter}{\numberline {7}scrap}{57}{chapter.7}%
+\contentsline {chapter}{\numberline {6}Appendix}{55}{chapter.6}%
+\contentsline {section}{\numberline {6.1}Category Theory}{55}{section.6.1}%
+\contentsline {chapter}{\numberline {7}scrap}{59}{chapter.7}%
