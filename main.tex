@@ -1273,6 +1273,32 @@ This implies that projective modules are effectively "invisible" to cohomology. 
     \end{align*}
     Since $P$ and $Q$ are projective, both sequenes split hence $\lim_{\leftarrow}(p,q) \cong P \oplus J$ and $\lim_{\leftarrow}(p,q) = Q \oplus I$
 \end{proof}
+    We can actually prove a stronger version of Schanuel's Lemma for larger projective sequences. 
+\begin{proposition}
+    (Generalised Schanuel's Lemma)
+    Let $M$ be a $\Lambda$ module and $0 \rightarrow I \rightarrow P_n \rightarrow \dots \rightarrow P_0 \rightarrow M \rightarrow 0$ and $0 \rightarrow J \rightarrow Q_n \rightarrow \dots \rightarrow Q_0 \rightarrow M \rightarrow 0$ be short exact sequences wherein $P_*$ and $Q_*$ are projective. Then we have: 
+    \begin{align*}
+        I \oplus Q_n \oplus P_{n-1} \oplus \dots = J \oplus P_n \oplus Q_{n-1} \oplus \dots 
+    \end{align*}
+\end{proposition}
+\begin{proof}
+    Induction on $n$. Schanuel's original lemma is the base case. Assume that the claim is true for $n-1$ and consider the two short exact sequences: 
+    \begin{align*}
+        0 \rightarrow I \rightarrow P_n \rightarrow \dots \rightarrow P_0 \xrightarrow{f} M \rightarrow 0\\
+        0 \rightarrow J \rightarrow Q_n \rightarrow \dots \rightarrow Q_0 \xrightarrow{g} M \rightarrow 0
+    \end{align*}
+    We get two short exact sequences at the very end:
+    \begin{align*}
+        0 \rightarrow \ker f \rightarrow P_0 \rightarrow M \rightarrow 0 \\
+        0 \rightarrow \ker g \rightarrow Q_0 \rightarrow M \rightarrow 0
+    \end{align*}
+    Applying the usual schanuel's lemma we get $\ker f \oplus Q_0 \cong \ker g \oplus P_0$. Hence we get a short exact sequences: 
+    \begin{align*}
+        0 \rightarrow I \rightarrow P_n \rightarrow \dots \rightarrow P_2 \rightarrow P_1 \oplus Q_0 \rightarrow \ker f \oplus Q_0 \rightarrow 0\\
+        0 \rightarrow J \rightarrow Q_n \rightarrow \dots \rightarrow Q_2 \rightarrow Q_1 \oplus P_0 \rightarrow \ker g \oplus P_0 \rightarrow 0
+    \end{align*}
+    Which is a sequence of length $n-1$ wherein all intermediate modules are projective so the inductive hypothesis applies!
+\end{proof}
 
 \begin{proposition}(Dimension Shift) \label{DimShift}
     Let $0 \rightarrow K \rightarrow P_0 \rightarrow M \rightarrow 0$ be an exact sequence of $\Lambda$-modules. If $P_0$ is projective then $H^n(K,N) \cong H^{n+1}(M,N)$ for all $\Lambda$-modules $N$. 
@@ -1351,6 +1377,9 @@ We end this section with a strange lemma that may or may not be taught.
     \bigoplus_{r \geq 0} P_{2r} \cong \bigoplus_{s \geq 0} P_{2s+1}
 \end{align*}
 \end{lemma}
+\begin{proof}
+    Take two copies of the long exact sequence, set $M = 0$ and apply generalised schanuel's. 
+\end{proof}
 
 \chapter{Finiteness Conditions}
 \section{Projective and Cohomological Dimension}

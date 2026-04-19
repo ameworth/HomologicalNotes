@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.7.14)  18 APR 2026 20:15
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.7.14)  18 APR 2026 22:10
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -859,14 +859,14 @@ Chapter 3.
 ]
 Chapter 4.
 
-Underfull \hbox (badness 10000) in paragraph at lines 1797--1799
+Underfull \hbox (badness 10000) in paragraph at lines 1826--1828
 
  []
 
 
 
 [45]
-Overfull \hbox (5.52689pt too wide) in paragraph at lines 1874--1877
+Overfull \hbox (5.52689pt too wide) in paragraph at lines 1903--1906
 $\OML/cmm/m/it/12 f$ \OT1/cmr/m/n/12 is in-jec-tive from the orig-i-nal ex-act se-quence, hence $\OML/cmm/m/it/12 ker\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 f\OT1/cmr/m/n/12 ) = 0$ im-ply-ing that $\OML/cmm/m/it/12 H[]\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 M\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 f\OT1/cmr/m/n/12 )) =
  []
 
@@ -881,7 +881,7 @@ $\OML/cmm/m/it/12 f$ \OT1/cmr/m/n/12 is in-jec-tive from the orig-i-nal ex-act s
 ]
 Chapter 5.
 
-Underfull \hbox (badness 10000) in paragraph at lines 1906--1908
+Underfull \hbox (badness 10000) in paragraph at lines 1935--1937
 
  []
 
@@ -890,19 +890,19 @@ Underfull \hbox (badness 10000) in paragraph at lines 1906--1908
 [49]
 
 [50]
-Underfull \hbox (badness 10000) in paragraph at lines 2030--2032
+Underfull \hbox (badness 10000) in paragraph at lines 2059--2061
 
  []
 
 
 
 [51]
-Overfull \hbox (0.76013pt too wide) in paragraph at lines 2067--2069
+Overfull \hbox (0.76013pt too wide) in paragraph at lines 2096--2098
 $\OML/cmm/m/it/12 Hom\OT1/cmr/m/n/12 (\U/msb/m/n/12 Z\OML/cmm/m/it/12 ; \U/msb/m/n/12 Z\OT1/cmr/m/n/12 ) = \U/msb/m/n/12 Z$ \OT1/cmr/m/n/12 from the pre-vi-ous ex-am-ple, $\OML/cmm/m/it/12 Hom\OT1/cmr/m/n/12 (^^C\OML/cmm/m/it/12 ; \U/msb/m/n/12 Z\OT1/cmr/m/n/12 ) = \U/msb/m/n/12 Z$ \OT1/cmr/m/n/12 by []1.37[] and $\OML/cmm/m/it/12 H[]\OT1/cmr/m/n/12 (\U/msb/m/n/12 Z\OML/cmm/m/it/12 ; \U/msb/m/n/12 Z\OT1/cmr/m/n/12 ) =
  []
 
 
-Overfull \hbox (31.72093pt too wide) detected at line 2092
+Overfull \hbox (31.72093pt too wide) detected at line 2121
 []
  []
 
@@ -939,17 +939,17 @@ Package rerunfilecheck Info: File `main.out' has not changed.
 (rerunfilecheck)             Checksum: C047BCB56A3EA294DE51B8C290E60DDC;4224.
  ) 
 Here is how much of TeX's memory you used:
- 30481 strings out of 468149
- 594987 string characters out of 5431082
+ 30482 strings out of 468149
+ 594999 string characters out of 5431082
  1023759 words of memory out of 5000000
  58329 multiletter control sequences out of 15000+600000
  641625 words of font info for 100 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  84i,27n,97p,3352b,1250s stack positions out of 10000i,1000n,20000p,200000b,200000s
  <C:\Users\archi\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcrm1200.pk><C:/Users/archi/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx10.pfb><C:/Users/archi/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Users/archi/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx8.pfb><C:/Users/archi/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbxti10.pfb><C:/Users/archi/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmcsc10.pfb><C:/Users/archi/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Users/archi/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cmextra/cmex8.pfb><C:/Users/archi/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/archi/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi12.pfb><C:/Users/archi/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi6.pfb><C:/Users/archi/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi7.pfb><C:/Users/archi/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Users/archi/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/archi/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/archi/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr17.pfb><C:/Users/archi/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr6.pfb><C:/Users/archi/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Users/archi/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Users/archi/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/archi/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy6.pfb><C:/Users/archi/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C:/Users/archi/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti12.pfb><C:/Users/archi/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/symbols/msbm10.pfb><C:/Users/archi/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/symbols/msbm7.pfb>
-Output written on main.pdf (59 pages, 556576 bytes).
+Output written on main.pdf (59 pages, 558308 bytes).
 PDF statistics:
- 794 PDF objects out of 1000 (max. 8388607)
- 278 named destinations out of 1000 (max. 500000)
+ 795 PDF objects out of 1000 (max. 8388607)
+ 279 named destinations out of 1000 (max. 500000)
  229 words of extra memory for PDF output out of 10000 (max. 10000000)
 
