@@ -1320,7 +1320,7 @@ This implies that projective modules are effectively "invisible" to cohomology. 
     \begin{align*}
         0 \rightarrow P_n \xrightarrow{\partial^{n}} P_{n-1} \xrightarrow{\partial^{n-1}} \dots \xrightarrow{\partial^1} P_0 \xrightarrow{\partial^0} M \rightarrow 0
     \end{align*}
-    Define\footnote{Note that these are called the nth syzygies of $M$, from the greek syzygos meaning "yoked together"} $K_n = \ker{\partial^n}$, then we get a family of short exact sequences as follows. Clearly for $n = 0$
+    Define\footnote{Note that these are called the nth syzygies of $M$, from the greek syzygos meaning "yoked together". In many texts the indexing for the syzygies starts at 1, so I have actually defined $K_n$ as the $n+1$st syzygy!} $K_n = \ker{\partial^n}$, then we get a family of short exact sequences as follows. Clearly for $n = 0$
     \begin{align*}
         0 \rightarrow K_0 \rightarrow P_0 \xrightarrow{\partial^0} M \rightarrow 0 
     \end{align*}
@@ -1410,7 +1410,7 @@ We end this section with a strange lemma that may or may not be taught.
     Take a projective res of $M$, take $Hom_\Lambda(-,N)$. Then $H^{n+1} = 0$ for all $N$. 
 \end{proof}
 
-We can get the converse via dimension shifting, so therefore we have: 
+We use dimension shifting to prove the converse:
 
 \begin{proposition}
      $pd(M) \leq n$ iff $cd(M) \leq n$.
@@ -1879,7 +1879,7 @@ Thus by the algebraic Mayer-Vietoris theorem, chain version we get a long exact 
     \dots \rightarrow H_1(D_*) \rightarrow H_1(M(f)_*) \rightarrow H_1(K_*) \rightarrow H_0(D) \rightarrow H_0(M(f)) \rightarrow 0
 \end{align*}
 
-\begin{proposition}
+\begin{proposition}\label{mapcyl}
     Suppose we have an exact sequence $0 \rightarrow C \xrightarrow{f} D \xrightarrow{p} E \rightarrow$, projective resolutions $C_*$ and $D_*$ for $C,D$ respectively and a lifting of $f$ to $f_* : C_* \to D_*$. Then the mapping cylinder $M(f)_*$ is a projective resolution of $E$. 
 \end{proposition}
 \begin{proof}
@@ -1904,7 +1904,76 @@ Thus by the algebraic Mayer-Vietoris theorem, chain version we get a long exact 
     $f$ is injective from the original exact sequence, hence $ker(f) = 0$ implying that $H_1(M(f)) = 0$. By first isomorphism theorem since the map $D \to H_0(M(f))$ is surjective, and the kernel of this map is equal to $im(f)$ by exactness $D/ker(D \to H_0(M(f))) = D/im(f) \cong H_0(M(f))$ and from the original sequence $D/im(f) = E$ we have that $E \cong H_0(M(f))$. \\
     Since the homology for $M(f)$ is zero for all $n$ aside from $n = 0$ where its isomorphic to $E$, this implies $M(f)_*$ is a resolution for $E$.
 \end{proof}
-With this construction, we are ready to prove Hilbert's Syzygy Theorem. 
+Now, lets do a bit more defining to see how we can extend the cohomological dimension of a module.
+
+Let $A$ be a module over $R$ and let $f : A \to A$ be an $R$-linear homomorphism. By $A_f$ we will mean the $R[t]$-module whose underlying $R$-module is $A$ on which $t$ acts as $f$, i.e. $a \cdot t = f(a)$ and $a \cdot t^n = f^n(a)$. For convention, we will define $A \otimes R[t] =: A[t]$. Don't worry too much about what that means in particular! From here we can define a few $R[t]$-homomorphisms: 
+\begin{align*}
+    ev : A[t] \to A_f \, \, \, ; \, \, \, ev(\sum^{n}_{r = 0}a_r \cdot t^r) = \sum^{n}_{r = 0} f^r(a_r) 
+\end{align*}
+Which is essentially the evaluation map, sending our $A \otimes R[t]$ module to the $R[t]$ module $A_f$ that we described above. We can also define: 
+\begin{align*}
+    1 \otimes t : A[t] \to A[t] \, \, \, ; \, \, \, (1 \otimes t) (\sum^{n}_{r = 0}a_r \cdot t^r) = \sum^{n}_{r = 0}a_r \cdot t^{r+1}\\
+    f \otimes 1 : A[t] \to A[t] \, \, \, ; \, \, \, (f \otimes 1) (\sum^{n}_{r = 0}a_r \cdot t^r) = \sum^n_{r=0}f(a_r)t^r
+\end{align*}
+
+The purpose of this, is that we want to prove that the following sequence is exact: 
+\begin{align*}
+    0 \rightarrow A[t] \xrightarrow{j} A[t] \xrightarrow{ev} A_f \rightarrow 0
+\end{align*}
+where $j = 1 \otimes t - f \otimes 1$. For this we need to prove the following things: 
+\begin{enumerate}
+    \item $ev : A[t] \to A_f$ is surjective
+    \item $1 \otimes t - f \otimes 1: A[t] \to A[t]$ is injective
+    \item $\ker{ev} = \text{im}(1 \otimes t - f \otimes 1)$
+\end{enumerate}
+
+Which I won't prove explicitly now. It should be noted however that the third point is the most challenging. For now just assume that sequence is exact. We can now prove our first proposition from this construction: 
+
+\begin{proposition}
+    cd($A_f$) $\leq$ cd($A$) $ + 1$
+\end{proposition}
+\begin{proof}
+    Suppose that $cd(A) = n$ and let $P_* \to A$ be a projective resolution of length $n$ over $R$ of $A$. Tensoring everything with $R[t]$ we get that $P_*[t] \to A[t]$ is a projective resolution of $A[t]$ over $R[t]$. As mentioned above, 
+    \begin{align*}
+        0 \rightarrow A[t] \xrightarrow{j} A[t] \xrightarrow{ev} A_f \rightarrow 0
+    \end{align*}
+    is exact. Hence by \ref{mapcyl} $M(j)_*$ is a projective resolution for $A_f$ of length $n+1$ over $R[t]$. So cd($A_f$) = pd($A_f$) $\leq n+1$. 
+\end{proof}
+
+\begin{corollary}\label{Hilbert2}
+    gd($R[t]$) $\leq$ gd($R$) $ + 1$. 
+\end{corollary}
+\begin{proof}
+    We can characterise the global dimension gd($R$) = max{cd($A$): $A \in \text{Mod}_R$} so cd($A_f$) $\leq$ gd($R$) $ + 1$. Observe that any $R[t]$ module can be written in the form $A_f$ if we just make $f$ acts as $t$. Hence gd($R[t]$) $ \leq$ gd($R$) $ + 1$. 
+\end{proof}
+
+Now, if $A$ is an $R$-module, denote $\hat{A}$ to be the $R[t]$ module whose underlying $R$-module is $A$ and $t$ acts as zero, i.e. $A_0$. We have the following proposition: 
+
+\begin{proposition}
+    If cd$(A) = n$ then $n + 1 \leq cd(\hat{A})$
+\end{proposition}
+\begin{proof}
+    Suppose that cd$(A) = n$ and $B$ is an $R$-module such that $H^n(A,B) \neq 0$. It will suffice to show that $H^{n+1}(\hat{A}, \hat{B}) \neq 0$. As before if we have a projective resolution of length $n$ $P_*[t] \to A[t]$ of $A[t]$ over $R[t]$. Moreover the sequence: 
+    \begin{align*}
+        0 \rightarrow A[t] \xrightarrow{\times t} A[t] \xrightarrow{ev} \hat{A} \rightarrow 0 
+    \end{align*} 
+    Where $\times t$ is like $j$ from before but we have set the action of $f$ to be the zero map. We can lift $\times t: A[t] \to A[t]$ to $\times t: P_*[t] \to P_*[t]$ which thus by \ref{mapcyl} gives a projective resolution $M(\times t)_*$ of $\hat{A}$. This begins as\footnote{Please note that the indexing maybe slightly incorrect but you get the idea}: 
+    \begin{align*}
+        0 \rightarrow P_n[t] \xrightarrow{\left(\begin{smallmatrix}(-1)^n t \\ \partial^P_{n-1} \end{smallmatrix}\right)} P_n[t] \oplus P_{n-1}[t] \xrightarrow{\left(\begin{smallmatrix}\partial^P_n & (-1)^n t \\ 0 & \partial^P_{n-1} \end{smallmatrix}\right)} \dots 
+    \end{align*}
+Now apply Hom$_{R[t]}(-, \hat{B})$. Since $t$ acts as zero on $\hat{B}$ we get that $Hom_{R[t]}(P[t], \hat{B}) \cong Hom_R(P,B)$ 
+\begin{align*}
+    Hom_R(P_n, B) \oplus Hom_R(P_{n-1}, B) \xrightarrow{\left( \begin{smallmatrix} 0 & (\partial^P_n)^*\end{smallmatrix} \right)} Hom_R(P_n, B) \rightarrow 0 
+\end{align*}
+So $H^{n+1}(\hat{A}, \hat{B})$ = Hom$_R(P_n, B)/im(\partial^P_n)^* = H^n(A,B)$ which we have explcitly said is not zero!
+\end{proof}
+
+\begin{corollary}\label{Hilbert1}
+    $gd(R) + 1 \leq gd(R[t])$
+\end{corollary}
+\begin{proof}
+    Suppose that $gd(R) = n$ and let $A$ be a module such that $cd(A) = n$ (which is possible by definition of the global dimension). By the above lemma $cd(\hat{A}) \geq n + 1$. So $gd(R) + 1 \leq cd{\hat{A}}$ which thus implies that $gd(R) + 1 \leq gd(R[t])$.  
+\end{proof}
 \begin{theorem}
     (Hilbert's Syzygy Theorem) If $R$ is a commutative ring, and $R[t]$ a polynomial ring in one variable, then $gd(R[t]) = gd(R) + 1$. In particular:
     \begin{align*}
@@ -1912,7 +1981,7 @@ With this construction, we are ready to prove Hilbert's Syzygy Theorem.
     \end{align*}
 \end{theorem}
 \begin{proof}
-    We won't actually prove this because its one of those silly huge proofs that for some reason introduces the tensor operation and I just cannot be bothered. 
+    Immediate application of \ref{Hilbert1} and \ref{Hilbert2}
 \end{proof}
 \chapter{Koszul Resolution}
 \section{Two-Variable Case}
