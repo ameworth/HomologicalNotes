@@ -1263,7 +1263,7 @@ The next step is about endowing $Ext(M,N)$ with some sort of addition. Basically
         0 \arrow[r] & N \arrow[r, "j"] & \lim_\rightarrow (\mathbf{0}, i) \arrow[r, "\pi"] & M \arrow[r] & 0
     \end{tikzcd}
     \]
-    Observe that $\lim(\mathbf{0}, i) = (N \oplus X)/im(\mathbf{0} \times i) \cong N \oplus X/im(i)$, which by exactness gives $N \oplus X/im(i) = N \oplus X/\ker(p) \cong M$ by the first isomorphism theorem. Hence $\lim_\rightarrow(\mathbf{0}, i) \cong N \oplus M$. So $\lim_{\rightarrow}(\mathbf{0}) = [T]$ where $[T]$ is the equivalence class given by the trivial split extension. 
+    Observe that $\lim(\mathbf{0}, i) = (N \oplus X)/im(\mathbf{0} \times i) \cong N \oplus X/im(i)$, which by exactness gives $N \oplus X/im(i) = N \oplus X/\ker(p) \cong N \oplus M$ by the first isomorphism theorem. Hence $\lim_\rightarrow(\mathbf{0}, i) \cong N \oplus M$. So $\lim_{\rightarrow}(\mathbf{0}) = [T]$ where $[T]$ is the equivalence class given by the trivial split extension. 
 \end{proof}
 
 \begin{theorem}(Second Part of Baer's)
@@ -1526,6 +1526,11 @@ We use dimension shifting to prove the converse:
 \section{Noetherian Rings and Modules}
 
 This section will go into detail on what are known as noetherian rings and modules. Although there are a few characterisations, the intuitive way to understand them is that they have a "general finiteness" condition, allowing us to treat complex algebraic objects as essentially finite. Before the definition of a noetherian ring was formalised, Hilbert characterised them as being "not too large". 
+\begin{definition}
+    Let $\Lambda$ be a ring. $\Lambda$ is noetherian if for every sequence of ideals $(I_r)_{r \in \mathbb{N}}$ such that $I_r \subsetneq I_{r+1}$ then $\exists n$ such that $I_r = I_n$ for all $r > n$. 
+\end{definition}
+
+We have an analogous definition for modules: 
 
 \begin{definition}
     Let $\Lambda$ be a ring, and $M$ a $\Lambda$-module. $M$ is \textbf{noetherian} if when given a sequences of submodules $(M_r)_{r \in \mathbb{N}}$ such that $M_r \subsetneq M_{r+1}$ then $\exists n$ such that $M_r = M_n$ for all $r >n$. I.e. the ascending chain terminates. 
@@ -1541,6 +1546,15 @@ It is important to note that there is an equivalent definition to noetherian mod
     Choose some $e_1 \in M$. If $M = [e_1)$, then we are done. Otherwise choose $e_2 \in M\setminus [e_1)$. Again, if $M = [e_1, e_2)$ then we are done.\\ Suppose that we continue this process $n$ elements $\{e_1, \dots, e_n\} \subset M$ where $[e_1, \dots, e_n) \neq M$. Then choose $e_{n+1} \in M \setminus [e_1, \dots, e_n)$. \\Suppose we can continue this indefinitely, then if we define $M_r = [e_1, \dots, e_r)$, we get an indefinite ascending chain of submodules $M_r \subset M_{r+1}$. $M$ is noetherian so this must terminate, i.e. $\exists n$ s.t. $M = [e_1, \dots, e_n)$
 \end{proof}
 
+We also have the following characterisation: 
+
+\begin{proposition}
+    If $\Lambda$ is a noetherian ring, then any finitely generated $\Lambda$-module is also noetherian. 
+\end{proposition}
+\begin{proof}
+    The module $\Lambda$ over itself is noetherian, since its submodules are ideals. Let $M$ be a finitely generated $\Lambda$-module, then since it is finitely generated, $M \cong \Lambda^n/\ker(\phi)$ for some $n$ and $\phi$ which maps the basis vectors of $\Lambda^n$ to the generators of $M$. $\Lambda^n$ is clearly noetherian, ker$\phi$ is a submodule of $\Lambda^n$ (and thus also noetherian), so therefore it follows that $M$ is noetherian. 
+\end{proof}
+
 \begin{proposition}
     If $M$ is noetherian, any $\Lambda$-submodule of $M$ is noetherian. 
 \end{proposition}
@@ -1548,7 +1562,7 @@ It is important to note that there is an equivalent definition to noetherian mod
     Let $K \subset M$ be a submodule of $M$. Take an ascending chain of submodules inside $K$: $K_1 \subset K_2 \subset K_3 \subset \dots$. Each $K_i$ is also submodule of $M$ and so by the definition of $M$ being noetherian this chain must terminate. Hence $K$ is also noetherian since any ascending chain of submodules terminates. 
 \end{proof}
 
-\begin{proposition}
+\begin{proposition}\label{noethsurge}
     Let $p : M \to Q$ be a surjective $\Lambda$-homomorphism. If $M$ is noetherian then $Q$ is noetherian.  
 \end{proposition}
 \begin{proof}
@@ -1598,6 +1612,22 @@ This implies $B_{r+1}/K = \psi^{-1}(B_r)$. We show by induction that $B_{r+1}/B_
 Since $K \neq \{0\}$, the chain $B_0 \subsetneq B_1 \subsetneq B_2 \subsetneq \dots$ is strictly increasing. Thus, $A$ is not Noetherian.
 \end{proof}
 
+I think there is a simpler way to prove this:
+\begin{proposition}
+    Let $M$ be a noetherian $R$-module and $f: M \to M$ a surjective $R$-linear map. Then $f$ is also injective.
+\end{proposition}
+\begin{proof}
+    Consider iterations of the map $f$: $f, f^2, f^3, \dots, f^n, \dots$. Each $f^n$ is a surjective endomorphism as the composition of surjective endomorphisms. Look at the kernel of each iteration: 
+    \begin{align*}
+        K_n = \ker (f^n) = \{m \in  M: f^n(m) = 0\}
+    \end{align*}
+    If $m \in K_n$, then $f^n(m) = 0$. So $f^{n+1}(m) = f(f^n(m)) = f(0) = 0$. So $m \in K_{n+1}$. This thus gives us an ascending sequence of submodules $K_1 \subset \dots \subset K_n \subset \dots$. Since $M$ is noetherian, this must stabilise. WLOG it stabilises at $n$\\
+    Now let $x \in \ker(f)$. $f^n$ is surjective, so there must exist some element $y \in M$ such that 
+    \begin{align*}
+        f^n(y) = x
+    \end{align*}
+    Applying $f$ to both sides gives $f^{n+1}(y) = 0$. This says that $y \in K_{n+1}$ but since it stabilises at $n$ this means that $y \in K_n$ therefore $f^n(y) = 0$. But we defined $f^n(y) = x$ so $x = 0$ and $f$ is injective.  q
+\end{proof}
 \begin{proposition}
     Let $A$ and $S$ be $\Lambda$-modules such that $A \oplus S \cong A$. If $A$ is noetherian show that $S = 0$
 \end{proposition}
@@ -1607,8 +1637,6 @@ Since $K \neq \{0\}$, the chain $B_0 \subsetneq B_1 \subsetneq B_2 \subsetneq \d
 
 \begin{proof}
     Let $\Lambda$ be a right noetherian ring. If $m,n$ are positive integers such that $\Lambda^m \cong \Lambda^n$ show that $m = n$.
-\end{proof}
-\begin{proof}
     WLOG $m < n$, then $\Lambda^m \cong \Lambda^m \oplus \Lambda^{n-m}$. $\Lambda^{n-m}$ is non empty, so by the previous proposition $\Lambda$ is non noetherian, which is a contradiction. Same works for the other case. Hence $m = n$. 
 \end{proof}
 
@@ -1621,6 +1649,29 @@ Since $K \neq \{0\}$, the chain $B_0 \subsetneq B_1 \subsetneq B_2 \subsetneq \d
         0 \rightarrow (a) \rightarrow R \rightarrow R/(a) \rightarrow 0 
     \end{align*}
     By hypothesis, $(a) \cong R^m$ and $R/(a) = R^n$ for some $n, m$ since they're free. In particular since $R/(a)$ is free, it is projective, so the sequence splits, and we have $R = R^n \oplus R^m$, but $n + m > 1$ so this is impossible. Hence $a$ must be invertible. 
+\end{proof}
+
+\begin{proposition}
+    Let $R$ be a noetherian ring and $M$, $N$ be finitely generated over $R$ (thus also noetherian), then $H^1(M,N)$ is finitely generated.
+\end{proposition}
+\begin{proof}
+    Since $M$ is finitely generated, we have the following exact sequence: 
+    \begin{align*}
+        0 \rightarrow K \rightarrow R^m \xrightarrow{f} M \rightarrow 0 
+    \end{align*}
+    Where $K = \ker (f)$ and $R^m$ is some free module. Apply $H^n(-, N)$ and recall that since $R^m$ is free it is projective so $H^1(R^m, N) = 0$ we get: 
+    \begin{align*}
+        0 \rightarrow Hom(M,N) \rightarrow Hom(R^n, N) \rightarrow Hom(K,N) \xrightarrow{\delta} H^1(M,N) \rightarrow 0
+    \end{align*}
+    $\delta$ is a surjective $R$-homomorphism so by \ref{noethsurge} it remains to show that $Hom(K,N)$ is noetherian. $N$ is noetherian by definition, since $K$ is a submodule of a noetherian module it is noetherian (and thus finitely generated), and hence we have: 
+    \begin{align*}
+        \dots \rightarrow R^n \rightarrow K \rightarrow 0 
+    \end{align*}
+    For some free module $R^n$. Applying the left exact functor $Hom_R(-, N)$ and recalling \ref{Homid} we get: 
+    \begin{align*}
+        0 \rightarrow Hom_R(K,N) \hookrightarrow N^n \rightarrow \dots 
+    \end{align*}
+    So $Hom_R(K,N)$ is isomorphic to a submodule of $N^n$, and hence is noetherian. 
 \end{proof}
 
 \section{Classification of Modules over PIDs}

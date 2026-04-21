@@ -14,10 +14,10 @@
 \contentsline {chapter}{\numberline {3}Finiteness Conditions}{37}{chapter.3}%
 \contentsline {section}{\numberline {3.1}Projective and Cohomological Dimension}{37}{section.3.1}%
 \contentsline {section}{\numberline {3.2}Noetherian Rings and Modules}{38}{section.3.2}%
-\contentsline {section}{\numberline {3.3}Classification of Modules over PIDs}{40}{section.3.3}%
-\contentsline {subsection}{\numberline {3.3.1}Principal Ideal Domains (PIDs)}{40}{subsection.3.3.1}%
-\contentsline {subsection}{\numberline {3.3.2}Torsion}{41}{subsection.3.3.2}%
-\contentsline {subsection}{\numberline {3.3.3}Classification Theorem}{42}{subsection.3.3.3}%
+\contentsline {section}{\numberline {3.3}Classification of Modules over PIDs}{41}{section.3.3}%
+\contentsline {subsection}{\numberline {3.3.1}Principal Ideal Domains (PIDs)}{41}{subsection.3.3.1}%
+\contentsline {subsection}{\numberline {3.3.2}Torsion}{42}{subsection.3.3.2}%
+\contentsline {subsection}{\numberline {3.3.3}Classification Theorem}{43}{subsection.3.3.3}%
 \contentsline {chapter}{\numberline {4}Hilbert's Syzygy Theorem}{47}{chapter.4}%
 \contentsline {chapter}{\numberline {5}Koszul Resolution}{51}{chapter.5}%
 \contentsline {section}{\numberline {5.1}Two-Variable Case}{51}{section.5.1}%
