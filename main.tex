@@ -891,8 +891,39 @@ It turns out there is another natural way in which to get a long exact sequence 
 \begin{align*}
     0 \rightarrow A \xrightarrow{f} B \xrightarrow{g} C \rightarrow 0 
 \end{align*}
-and a $\Lambda$-module $M$. Instead of taking a projective resolution of $M$, we take projective resolutions of $A,B$, and $C$, make them into a short exact sequence and then apply the \textit{contravariant} functor $Hom_\Lambda(-,M)$. This then induces the \textbf{reverse exact sequence} of cohomology groups. The proofs of each proposition leading up to applying Mayer-Vietoris requires doing lots of finnicky algebra and huge diagrams so I've made the inspired decision to leave it out of these notes, sorry!
+and a $\Lambda$-module $M$. Instead of taking a projective resolution of $M$, we take projective resolutions of $A,B$, and $C$, make them into a short exact sequence and then apply the \textit{contravariant} functor $Hom_\Lambda(-,M)$. This then induces the \textbf{reverse exact sequence} of cohomology groups. To prove this, we start with a very useful lemma: 
 
+\begin{lemma}[Snake Lemma]
+    Let
+    \[
+    \begin{tikzcd}
+        & A' \arrow[r] \arrow[d, "f"] & B' \arrow[r, "p"] \arrow[d, "g"] & C' \arrow[r] \arrow[d, "h"] & 0\\
+        0 \arrow[r] & A \arrow[r, "i"] & B \arrow[r] & C &
+    \end{tikzcd}
+    \]    
+    be a commuting diagram wherein both rows are exact. Then
+    \begin{enumerate}
+        \item If $A' \to B'$ is injective, then $ker(f) \to ker(g)$ is injective
+        \item If $B \to C$ is surjective, then $coker(g) \to coker(h)$ is surjective. 
+    \end{enumerate}
+\end{lemma}
+
+\begin{lemma}(Snake Lemma V2)\label{SnakeLemma}
+    Suppose we have the commuting diagram: 
+    \[
+    \begin{tikzcd}
+        0 \arrow[r] & D \arrow[d, "\alpha"] \arrow[r, "\hat{i}"] & E \arrow[r, "\hat{p}"] \arrow[d, "\beta"] & F \arrow[d, "\gamma"] \arrow[r] & 0 \\
+        0 \arrow[r] & A \arrow[d] \arrow[r, "i"] & \arrow[d] \arrow[r, "p"] & C \arrow[r] \arrow[d]& 0 \\
+        & 0 & 0 & 0 &
+    \end{tikzcd}
+    \]
+    with each row exact and $\alpha, \beta, \gamma$ surjective. Then: 
+    \begin{enumerate}
+        \item $\hat{p}$ is a surjective map from $ker(\beta) \to ker(\gamma)$
+        \item $\hat{i}$ is an injective map from $ker(\alpha) \to ker(\beta)$
+        \item $ker(\hat{p} \mid_{ker(\beta)}) = im(\hat{i})$
+    \end{enumerate}
+\end{lemma}
 \begin{remark}
     If we take any resolution $P_* \rightarrow A$, $T_* \rightarrow B$, and $Q_* \rightarrow C$, then the sequence
     \begin{align*}
@@ -911,14 +942,59 @@ and a $\Lambda$-module $M$. Instead of taking a projective resolution of $M$, we
         \end{pmatrix} 
     \end{align*} 
 \end{theorem}
+We won't give a detailed proof of this theorem, but briefly outline the construction. Basically we start with the following diagram: 
+\[
+\begin{tikzcd}
+    0 \arrow[r] & P_0 \arrow[d, "\epsilon"] \arrow[r, "\hat{i}"] & P_0 \oplus Q_0 \arrow[d, dashed, "\mu"] \arrow[r, "\pi"] & Q_0 \arrow[r] \arrow[d, "\eta"] & 0 \\
+    0 \arrow[r] & A \arrow[d] \arrow[r, "i"] & B \arrow[d] \arrow[r, "p"] & C \arrow[r] \arrow[d] & 0 \\
+    & 0 & 0 & 0 
+\end{tikzcd}
+\]
+Where $\hat{i}$ and $\pi$ are the obvious projection maps. Both rows are exact and we get the map $\mu$ from the fact $P_0 \oplus Q_0$ is projective so $\eta \circ \pi$ can be lifted. Note that a short proof can be used to show that $\mu$ is surjective. Now, we can extend this sequence by taking kernels of the various maps, giving: 
 
-\begin{proposition}
+\[
+\begin{tikzcd}
+    & 0 \arrow[d]& 0 \arrow[d] & 0 \arrow[d]\\
+    0 \arrow[r] & \ker (\epsilon) \arrow[d] \arrow[r] & \ker (\mu) \arrow[d] \arrow[r] & \ker (\eta) \arrow[r] \arrow[d]  & 0 \\
+    0 \arrow[r] & P_0 \arrow[d, "\epsilon"] \arrow[r, "\hat{i}"] & P_0 \oplus Q_0 \arrow[d,  "\mu"] \arrow[r, "\pi"] & Q_0 \arrow[r] \arrow[d, "\eta"] & 0 \\
+    0 \arrow[r] & A \arrow[d] \arrow[r, "i"] & B \arrow[d] \arrow[r, "p"] & C \arrow[r] \arrow[d] & 0 \\
+    & 0 & 0 & 0 
+\end{tikzcd}
+\]
+By \ref{SnakeLemma} the top row is exact. We then repeat our previous step, but with replacing the bottom row with the short exact sequence of kernels i.e.: 
+\[
+\begin{tikzcd}
+    0 \arrow[r] & P_1 \arrow[d, "\epsilon'"] \arrow[r] & P_1 \oplus Q_1 \arrow[d, dashed, "\mu'"] \arrow[r] & Q_1 \arrow[r] \arrow[d, "\eta'"] & 0 \\
+    0 \arrow[r] & \ker (\epsilon) \arrow[r] \arrow[d] & \ker (\mu) \arrow[d] \arrow[r] & \ker (\eta) \arrow[r] \arrow[d] & 0\\
+    & 0 & 0 & 0 & 
+\end{tikzcd}
+\]
+Where we have induced a surjective $\mu'$ as before and each row is exact. So then, splicing with our previous diagram, we get: 
+\[
+\begin{tikzcd}
+    0 \arrow[r] & P_1 \arrow[d, "\epsilon'"] \arrow[r] & P_1 \oplus Q_1 \arrow[d, "\mu'"] \arrow[r] & Q_1 \arrow[r] \arrow[d, "\eta'"] & 0 \\
+    0 \arrow[r] & P_0 \arrow[d, "\epsilon"] \arrow[r, "\hat{i}"] & P_0 \oplus Q_0 \arrow[d,  "\mu"] \arrow[r, "\pi"] & Q_0 \arrow[r] \arrow[d, "\eta"] & 0 \\
+    0 \arrow[r] & A \arrow[d] \arrow[r, "i"] & B \arrow[d] \arrow[r, "p"] & C \arrow[r] \arrow[d] & 0 \\
+    & 0 & 0 & 0 
+\end{tikzcd}
+\]
+From here, we repeat this process indefinitely. We claim that the homomorphism between each $T_n = P_n \oplus Q_n$ is 
+    \begin{align*}
+        \partial^T_n = 
+        \begin{pmatrix}
+            \partial^P_n & ? \\
+            0            & \partial^Q_n
+        \end{pmatrix} 
+    \end{align*}    
+This is not so hard to prove, moreover it clearly gives an exact sequence. 
+
+\begin{corollary}
     Let $P_*$, $Q_*$ and $T_*$ be as above. Then the sequence 
     \begin{align*}
         0 \rightarrow P_* \rightarrow T_* \rightarrow Q_* \rightarrow 0
     \end{align*}
     is a short exact sequence. 
-\end{proposition}
+\end{corollary}
 
 \begin{lemma}
     Let $0 \rightarrow P \xrightarrow{i} P \oplus Q \xrightarrow{\pi} Q \rightarrow 0$ be a split exact sequence of $\Lambda$-modules. Then for any $\Lambda$-module $M$, we have that 
@@ -945,6 +1021,22 @@ and a $\Lambda$-module $M$. Instead of taking a projective resolution of $M$, we
     \end{align*}
     known as the \textbf{reverse exact sequence}. Note the contravariant nature. 
 \end{theorem}
+\begin{proof}
+    Take the exact sequence of projective resolutions: 
+    \[
+    \begin{tikzcd}
+        0 \arrow[r] & P_* \arrow[d] \arrow[r] & T_* \arrow[r] \arrow[d] & Q_* \arrow[r] \arrow[d] & 0 \\
+        & A \arrow[d] & B \arrow[d] & C \arrow[d] &\\
+        & 0 & 0 & 0 & 
+    \end{tikzcd}
+    \]
+    Apply Hom(-, $N$) to get 
+    \begin{align*}
+        0 \rightarrow Hom(Q_*,M) \rightarrow Hom(T_*,M) \rightarrow Hom(P_*,N) \rightarrow 0    
+    \end{align*}
+    as an exact sequence. 
+    Apply Mayer Vietoris. 
+\end{proof}
 
 \chapter{Baer's Theorem and Ext}
 In this chapter, we will develop more what the cohomology groups actually are and their relation to the Ext group. 
