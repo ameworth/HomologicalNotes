@@ -47,7 +47,11 @@
 \chapter*{Preface}
 \addcontentsline{toc}{chapter}{Preface} 
 \vspace{1cm}
-Help 
+This is an attempt to write notes for MATH0071: Homological Algebra, as taught by Professor FEA Johnson at UCL in 25-26. This document should contain everything one needs to understand the course, although does miss out some technical details in the longer, less examinable, proofs. Please be aware that the notes are NOT endorsed by the lecturer and are (at best) very idiosyncratic. Take everything with a pinch of salt. \vspace{1cm}
+
+
+\noindent Special thanks to Mark and John for making sure at least some of this makes sense. \vspace{1cm }
+
 
 \noindent London, England\hfill Archie 
 
@@ -1794,10 +1798,36 @@ To prove this we need two lemmas:
 \begin{lemma}
     Let $R$ be a commutative integral domain and $M$ be a torsion-free f.g. module over $R$. Then $M$ is a submodule of some free module (i.e. there exists an injective $R$-module homomorphism $i : M \to R^n$ for some $n$)
 \end{lemma}
+\begin{proof}
+    Let $\{m_1, \dots, m_n\}$ be a f.g. set for $M$. Let $\{e_1, \dots, e_n\} \subset \{m_1, \dots, m_n\}$ be a maximal linearly independent subset, and let $F = span_R\{e_1, \dots, e_n\}$. Obviously, $F$ is a free module over $R$. Write $\{f_1, \dots, f_m\} = \{m_1, \dots, m_n\} \setminus \{e_1, \dots, e_n\}$. I.e. the $f_i$ are generators of $M$ that aren't in our independent set. For any $i$, $\{f_i, e_1, \dots, e_n\}$ is linearly dependent, so we get a dependence relation
+    \begin{align*}
+        f_i \alpha_i + e_1 \mu_1 + \dots + e_n \mu_n = 0
+    \end{align*}
+    Where either $\alpha_i$ or one of $\mu_1, \dots, \mu_n$. If $\alpha_i = 0$ we then get that $\{e_1, \dots, e_n\}$ isn't LI, so $\alpha_i \neq 0$. Set $\alpha = \alpha_1 \dots \alpha_n$. Note that $\alpha \neq 0$ since we are in an integral domain. Then for each $i$,
+    \begin{align*}
+        f_i \alpha = \sum e_r (- \text{some coefficients}) \in F
+    \end{align*}
+    So for every generator of $M$ we get that $m\alpha \in F$. So define a map $\psi: M \to F$ by $\psi(m) = \alpha m$. Suppose that $\psi(m) = 0$. Then $\alpha m = 0$ but $M$ is torsion free, so $m = 0$. So its an injection. Therefore $M$ is isomorphic to the submodule of some free module. 
+\end{proof}
 
 \begin{lemma}
     Let $R$ be a commutative PID. Let $M \in Mod_R$ be f.g. If $M$ is a submodule of a free module then it is itself free. 
 \end{lemma}
+\begin{proof}
+    Suppose that $M$ is a submodule of $R^n$. Induction on $n$. If $n=1$, then $M$ is isomorphic to a principal ideal, either zero or something non-zero say $(a)$. The map $r \mapsto ra$ is an isomorphism so $M \cong R$. Suppose proved for $n-1$ and let $M$ be a submodule of $R^n$. We have the following exact sequence for $R^n$: 
+    \begin{align*}
+        0 \rightarrow R^{n-1} \xrightarrow{i} R^n \xrightarrow{p} R \rightarrow 0
+    \end{align*}
+    Then we can then write $M$ as the middle term of the following exact sequence: 
+    \begin{align*}
+        0 \rightarrow M \cap R^{n-1} \xrightarrow{i} M \xrightarrow{p} p(M) \rightarrow 0
+    \end{align*}
+    By induction, $M \cap R^{n-1} \cong R^m$ for some $m \leq n-1$, so we can rewrite this as
+    \begin{align*}
+        0 \rightarrow R^m \xrightarrow{i} M \xrightarrow{p} p(M) \rightarrow 0 
+    \end{align*}
+    If $p(M) = 0$ then we are done as $M \cong R^m$. If $p(M) \neq 0$ then since $R$ is a PID, $p(M) \cong R$ so the sequence splits and $M \cong R^m \oplus R$. Either way it is free!
+\end{proof}
 
 \begin{proof}
     Proof of theorem. $M$ is torsion free implies that $M$ is a submodule of a free module by the first lemma. The second lemma then implies that $M$ itself is free. 
@@ -2492,26 +2522,6 @@ Functors also have a property called exactness.
     By commutativity. Hence $(\beta, \gamma)$ restricted to Im($-f \times g$) is zero. Hence ($\beta, \gamma$) induces a unique homomorphism $\delta = [\beta, \gamma] : \lim\limits_{\to}(f,g) \to E$
 \end{proof}
 
-\chapter{scrap}
-Basically, we want our module $M$ to be free, because then everything is a lot easier. A lot of the time, this cannot happen, so we create a sequence of free modules leading up to $M$. Suppose, from the previous section, we have a $R$-module $M$. Then we can find a surjective linear map $\alpha_0 : F_0 \rightarrow M$ where $F_0$ is free ( This is the 1st approximation to $M$ being free). Now if $\alpha_0$ is also injective, then $M \cong F_0$ and thus $M$ is free. Suppose not, then we have that $Ker(\alpha_0) \neq 0$. Since this is an $R$-module, we can use the proposition again and find surjective $\alpha_1 : F_1 \rightarrow Ker(F_0)$, giving us the sequence: 
-\begin{align*}
-    F_1 \xrightarrow{\alpha_1} F_0 \xrightarrow{\alpha_0} M \rightarrow 0
-\end{align*}
-In general, $Ker(\alpha_1)$ isn't injective either, so you repeat the process. Now lets define this all formally. 
 
-
-\begin{proposition}
-    Let $M$ be an $R$-module. Then there exists an exact sequence of $R$-linear mappings: 
-    \begin{align*}
-        \dots \rightarrow F_{n+1} \xrightarrow{f_{n+1}} F_n \xrightarrow{f_n} F_{n-1} \rightarrow \dots F_2 \xrightarrow{f_2} F_1 \xrightarrow{f_1} F_0 \xrightarrow{f_0} M \rightarrow \dots 
-    \end{align*}
-    where each $F_i$ is free. 
-\end{proposition}
-
-Such a sequence is called a \textbf{free resolution} of $M$. Sometimes it carries on forever and other times it stops after finite steps. 
-
-\begin{example}
-    Lets work in the ring $R = \mathbb{Z}$ and take $M = \mathbb{Z}/2$
-\end{example}
 
 \end{document}

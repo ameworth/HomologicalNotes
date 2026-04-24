@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.7.14)  21 APR 2026 17:24
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.7.14)  24 APR 2026 19:26
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -734,7 +734,7 @@ Chapter 1.
 
 
 [7]
-Overfull \hbox (5.30803pt too wide) detected at line 121
+Overfull \hbox (5.30803pt too wide) detected at line 125
 []
  []
 
@@ -747,7 +747,7 @@ Overfull \hbox (5.30803pt too wide) detected at line 121
 [10]
 
 [11]
-Underfull \hbox (badness 10000) in paragraph at lines 360--362
+Underfull \hbox (badness 10000) in paragraph at lines 364--366
 
  []
 
@@ -758,14 +758,14 @@ Underfull \hbox (badness 10000) in paragraph at lines 360--362
 [13]
 
 [14]
-Underfull \hbox (badness 10000) in paragraph at lines 529--530
+Underfull \hbox (badness 10000) in paragraph at lines 533--534
 
  []
 
 
 
 [15]
-Overfull \hbox (24.04787pt too wide) in paragraph at lines 558--559
+Overfull \hbox (24.04787pt too wide) in paragraph at lines 562--563
 [][]\OT1/cmr/bx/n/12 Proposition 1.32. []\OT1/cmr/m/it/12 Given an ex-act se-quence $\OML/cmm/m/it/12 M [] N \OMS/cmsy/m/n/12 ! \OT1/cmr/m/n/12 0$\OT1/cmr/m/it/12 , $\OML/cmm/m/it/12 Hom[]\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 D; M\OT1/cmr/m/n/12 ) [] \OML/cmm/m/it/12 Hom[]\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 D; N\OT1/cmr/m/n/12 ) \OMS/cmsy/m/n/12 !
  []
 
@@ -780,7 +780,7 @@ Overfull \hbox (24.04787pt too wide) in paragraph at lines 558--559
 [19]
 
 [20]
-Overfull \hbox (18.14926pt too wide) in paragraph at lines 865--867
+Overfull \hbox (18.14926pt too wide) in paragraph at lines 869--871
 \OML/cmm/m/it/12 P[]=ker\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 ^^O\OT1/cmr/m/n/12 ) = \OML/cmm/m/it/12 P[]=im\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 @[]\OT1/cmr/m/n/12 ) [] \OML/cmm/m/it/12 M$\OT1/cmr/m/n/12 . Now ap-ply-ing the above lemma we get that $\OML/cmm/m/it/12 ^^O[] \OT1/cmr/m/n/12 : \OML/cmm/m/it/12 Hom\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 M; N\OT1/cmr/m/n/12 ) \OMS/cmsy/m/n/12 !
  []
 
@@ -802,7 +802,7 @@ Overfull \hbox (18.14926pt too wide) in paragraph at lines 865--867
 Chapter 2.
 
 Package hyperref Warning: Difference (2) between bookmark levels is greater 
-(hyperref)                than one, level fixed on input line 1044.
+(hyperref)                than one, level fixed on input line 1048.
 
 
 
@@ -811,14 +811,14 @@ Package hyperref Warning: Difference (2) between bookmark levels is greater
 [28]
 
 [29]
-Underfull \hbox (badness 10000) in paragraph at lines 1241--1242
+Underfull \hbox (badness 10000) in paragraph at lines 1245--1246
 
  []
 
 
 
 [30]
-Overfull \hbox (5.26587pt too wide) in paragraph at lines 1299--1301
+Overfull \hbox (5.26587pt too wide) in paragraph at lines 1303--1305
 [][]\OT1/cmr/m/n/12 Let $^^C = \U/msb/m/n/12 Z$\OT1/cmr/m/n/12 , and $\OML/cmm/m/it/12 M \OT1/cmr/m/n/12 = \OML/cmm/m/it/12 N \OT1/cmr/m/n/12 = \U/msb/m/n/12 Z\OML/cmm/m/it/12 =\OT1/cmr/m/n/12 3$. We want to com-pute $\OML/cmm/m/it/12 H[]\OT1/cmr/m/n/12 (\U/msb/m/n/12 Z\OML/cmm/m/it/12 =\OT1/cmr/m/n/12 3\OML/cmm/m/it/12 ; \U/msb/m/n/12 Z\OML/cmm/m/it/12 =\OT1/cmr/m/n/12 3)$;
  []
 
@@ -859,80 +859,76 @@ Chapter 3.
 [45]
 
 [46]
+
+[47]
+
+[48
+
+]
 Chapter 4.
 
-Underfull \hbox (badness 10000) in paragraph at lines 1969--1971
+Underfull \hbox (badness 10000) in paragraph at lines 1999--2001
 
  []
 
 
 
-[47
-
-]
-Overfull \hbox (5.52689pt too wide) in paragraph at lines 2046--2049
+[49]
+Overfull \hbox (5.52689pt too wide) in paragraph at lines 2076--2079
 $\OML/cmm/m/it/12 f$ \OT1/cmr/m/n/12 is in-jec-tive from the orig-i-nal ex-act se-quence, hence $\OML/cmm/m/it/12 ker\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 f\OT1/cmr/m/n/12 ) = 0$ im-ply-ing that $\OML/cmm/m/it/12 H[]\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 M\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 f\OT1/cmr/m/n/12 )) =
  []
 
 
 
-[48]
-
-[49]
-
 [50]
+
+[51]
+
+[52]
 Chapter 5.
 
-Underfull \hbox (badness 10000) in paragraph at lines 2147--2149
+Underfull \hbox (badness 10000) in paragraph at lines 2177--2179
 
  []
 
 
 
-[51
+[53
 
 ]
 
-[52]
-Underfull \hbox (badness 10000) in paragraph at lines 2271--2273
+[54]
+Underfull \hbox (badness 10000) in paragraph at lines 2301--2303
 
  []
 
 
 
-[53]
-Overfull \hbox (0.76013pt too wide) in paragraph at lines 2308--2310
+[55]
+Overfull \hbox (0.76013pt too wide) in paragraph at lines 2338--2340
 $\OML/cmm/m/it/12 Hom\OT1/cmr/m/n/12 (\U/msb/m/n/12 Z\OML/cmm/m/it/12 ; \U/msb/m/n/12 Z\OT1/cmr/m/n/12 ) = \U/msb/m/n/12 Z$ \OT1/cmr/m/n/12 from the pre-vi-ous ex-am-ple, $\OML/cmm/m/it/12 Hom\OT1/cmr/m/n/12 (^^C\OML/cmm/m/it/12 ; \U/msb/m/n/12 Z\OT1/cmr/m/n/12 ) = \U/msb/m/n/12 Z$ \OT1/cmr/m/n/12 by []1.37[] and $\OML/cmm/m/it/12 H[]\OT1/cmr/m/n/12 (\U/msb/m/n/12 Z\OML/cmm/m/it/12 ; \U/msb/m/n/12 Z\OT1/cmr/m/n/12 ) =
  []
 
 
-Overfull \hbox (31.72093pt too wide) detected at line 2333
+Overfull \hbox (31.72093pt too wide) detected at line 2363
 []
  []
 
 
 
-[54]
+[56]
 
-[55]
+[57]
 
-[56
+[58
 
 ]
 Chapter 6.
 
 
-[57]
-
-[58]
-
 [59]
 
-[60
-
-]
-Chapter 7.
-
+[60]
 
 [61] (main.aux)
  ***********
@@ -940,20 +936,20 @@ LaTeX2e <2025-06-01> patch level 1
 L3 programming layer <2025-07-11>
  ***********
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: C047BCB56A3EA294DE51B8C290E60DDC;4224.
+(rerunfilecheck)             Checksum: 07C314B6693095B47B24752B8E7BE3CF;4155.
  ) 
 Here is how much of TeX's memory you used:
- 31424 strings out of 468149
- 619435 string characters out of 5431082
- 1039489 words of memory out of 5000000
- 59250 multiletter control sequences out of 15000+600000
+ 31420 strings out of 468149
+ 619393 string characters out of 5431082
+ 1039486 words of memory out of 5000000
+ 59249 multiletter control sequences out of 15000+600000
  641625 words of font info for 100 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  84i,27n,97p,3352b,1250s stack positions out of 10000i,1000n,20000p,200000b,200000s
  <C:\Users\archi\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcrm1200.pk><C:/Users/archi/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx10.pfb><C:/Users/archi/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Users/archi/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx8.pfb><C:/Users/archi/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbxti10.pfb><C:/Users/archi/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmcsc10.pfb><C:/Users/archi/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Users/archi/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cmextra/cmex8.pfb><C:/Users/archi/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/archi/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi12.pfb><C:/Users/archi/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi6.pfb><C:/Users/archi/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi7.pfb><C:/Users/archi/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Users/archi/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/archi/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/archi/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr17.pfb><C:/Users/archi/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr6.pfb><C:/Users/archi/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Users/archi/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Users/archi/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/archi/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy6.pfb><C:/Users/archi/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C:/Users/archi/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti12.pfb><C:/Users/archi/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/symbols/msbm10.pfb><C:/Users/archi/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/symbols/msbm7.pfb>
-Output written on main.pdf (61 pages, 585964 bytes).
+Output written on main.pdf (61 pages, 586472 bytes).
 PDF statistics:
- 835 PDF objects out of 1000 (max. 8388607)
- 300 named destinations out of 1000 (max. 500000)
- 229 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 828 PDF objects out of 1000 (max. 8388607)
+ 297 named destinations out of 1000 (max. 500000)
+ 221 words of extra memory for PDF output out of 10000 (max. 10000000)
 

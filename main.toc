@@ -18,10 +18,9 @@
 \contentsline {subsection}{\numberline {3.3.1}Principal Ideal Domains (PIDs)}{41}{subsection.3.3.1}%
 \contentsline {subsection}{\numberline {3.3.2}Torsion}{42}{subsection.3.3.2}%
 \contentsline {subsection}{\numberline {3.3.3}Classification Theorem}{43}{subsection.3.3.3}%
-\contentsline {chapter}{\numberline {4}Hilbert's Syzygy Theorem}{47}{chapter.4}%
-\contentsline {chapter}{\numberline {5}Koszul Resolution}{51}{chapter.5}%
-\contentsline {section}{\numberline {5.1}Two-Variable Case}{51}{section.5.1}%
-\contentsline {section}{\numberline {5.2}Three-Variable Case}{52}{section.5.2}%
-\contentsline {chapter}{\numberline {6}Appendix}{57}{chapter.6}%
-\contentsline {section}{\numberline {6.1}Category Theory}{57}{section.6.1}%
-\contentsline {chapter}{\numberline {7}scrap}{61}{chapter.7}%
+\contentsline {chapter}{\numberline {4}Hilbert's Syzygy Theorem}{49}{chapter.4}%
+\contentsline {chapter}{\numberline {5}Koszul Resolution}{53}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Two-Variable Case}{53}{section.5.1}%
+\contentsline {section}{\numberline {5.2}Three-Variable Case}{54}{section.5.2}%
+\contentsline {chapter}{\numberline {6}Appendix}{59}{chapter.6}%
+\contentsline {section}{\numberline {6.1}Category Theory}{59}{section.6.1}%
